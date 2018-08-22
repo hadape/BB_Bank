@@ -81,3 +81,5 @@ C:\Users\user\Dropbox\Unicorn\C#_Projekty\BB_Banka\BB_Banka\bin\EntityFramework.
 C:\Users\user\Dropbox\Unicorn\C#_Projekty\BB_Banka\BB_Banka\bin\EntityFramework.SqlServer.dll
 C:\Users\user\Dropbox\Unicorn\C#_Projekty\BB_Banka\BB_Banka\bin\EntityFramework.xml
 C:\Users\user\Dropbox\Unicorn\C#_Projekty\BB_Banka\BB_Banka\bin\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csprojAssemblyReference.cache
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.CoreCompileInputs.cache
