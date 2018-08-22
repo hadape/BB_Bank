@@ -11,31 +11,75 @@ namespace BB_Banka
     public class PozadavekController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpPost]
+        public IEnumerable<string> Get([FromBody]PozadPrijeti a)
         {
-           
-            return new string[] { "value1", "value2" };
+            
+            ServisPozadavek SP = new ServisPozadavek();
+            decimal ab=SP.PridejPozadavky(a.telcis,a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka,a.brokerid);
+            ab = Math.Round(ab, 2);
+            return new string[] { ab.ToString()};
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        public Pozadavek Get(int id)
         {
-            return "value";
+            Pozadavek pp = new Pozadavek();
+            ServisPozadavek SP = new ServisPozadavek();
+            pp.id = SP.GetPozadavek(id).id;
+            pp.k_id = SP.GetPozadavek(id).klient_id;
+            pp.b_id = SP.GetPozadavek(id).broker_id;
+            pp.doba = SP.GetPozadavek(id).mesice;
+            pp.castka = SP.GetPozadavek(id).castka;
+            pp.RPSN = SP.GetPozadavek(id).rpsn;
+            pp.poznamka = SP.GetPozadavek(id).poznamka;
+            pp.mes_splatka = SP.GetPozadavek(id).spl_mesic;
+            pp.cel_splatka = SP.GetPozadavek(id).spl_celkem;
+
+            return pp;
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
+        /* [HttpPost]
+         public void Post([FromBody]string value)
+         {
+         }*/
 
         // PUT api/<controller>/5
+        [HttpPut]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/<controller>/5
+        [HttpDelete]
         public void Delete(int id)
         {
         }
+    }
+    public class PozadPrijeti
+        {
+
+        public string telcis;
+        public int pujcka;
+        public int mesice;
+        public string jmeno;
+        public string prijmeni;
+        public string poznamka;
+        public int brokerid;
+        public string email;
+            }
+    public class Pozadavek
+    {
+        public int id;
+        public int? b_id;
+        public int doba;
+        public int? k_id;
+        public int castka;
+        public decimal? RPSN;
+        public string poznamka;
+        public decimal? mes_splatka;
+        public decimal? cel_splatka;
     }
 }
