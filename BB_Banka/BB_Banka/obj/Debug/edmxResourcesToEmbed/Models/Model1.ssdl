@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KalkulaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BROKERI">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ico" Type="int" />
+    <Property Name="start_datum" Type="date" />
+    <Property Name="aktivni" Type="int" />
+    <Property Name="nazev" Type="varchar" MaxLength="256" />
+    <Property Name="soubor" Type="varchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="KLIENTI">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="telefon" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="jmeno" Type="varchar" MaxLength="256" />
+    <Property Name="prijmeni" Type="varchar" MaxLength="256" />
+    <Property Name="email" Type="varchar" MaxLength="256" />
+    <Property Name="bydliste" Type="varchar" MaxLength="256" />
+    <Property Name="narozen" Type="date" />
+    <Property Name="rodne_cislo" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="KONTAKTY">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pozadavek_id" Type="int" Nullable="false" />
+    <Property Name="datum" Type="date" Nullable="false" />
+    <Property Name="vysledek" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POZADAVKY">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="broker_id" Type="int" />
+    <Property Name="klient_id" Type="int" />
+    <Property Name="castka" Type="int" Nullable="false" />
+    <Property Name="mesice" Type="int" Nullable="false" />
+    <Property Name="vysledek" Type="int" />
+    <Property Name="poznamka" Type="varchar" MaxLength="256" />
+    <Property Name="rpsn" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="spl_mesic" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="spl_celkem" Type="decimal" Precision="9" Scale="2" />
+  </EntityType>
+  <Association Name="fk_ko_po">
+    <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="1" />
+    <End Role="KONTAKTY" Type="Self.KONTAKTY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POZADAVKY">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="KONTAKTY">
+        <PropertyRef Name="pozadavek_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_po_br">
+    <End Role="BROKERI" Type="Self.BROKERI" Multiplicity="0..1" />
+    <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BROKERI">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="POZADAVKY">
+        <PropertyRef Name="broker_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_po_kl">
+    <End Role="KLIENTI" Type="Self.KLIENTI" Multiplicity="0..1" />
+    <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KLIENTI">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="POZADAVKY">
+        <PropertyRef Name="klient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KalkulaceModelStoreContainer">
+    <EntitySet Name="BROKERI" EntityType="Self.BROKERI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KLIENTI" EntityType="Self.KLIENTI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KONTAKTY" EntityType="Self.KONTAKTY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POZADAVKY" EntityType="Self.POZADAVKY" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_ko_po" Association="Self.fk_ko_po">
+      <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+      <End Role="KONTAKTY" EntitySet="KONTAKTY" />
+    </AssociationSet>
+    <AssociationSet Name="fk_po_br" Association="Self.fk_po_br">
+      <End Role="BROKERI" EntitySet="BROKERI" />
+      <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+    </AssociationSet>
+    <AssociationSet Name="fk_po_kl" Association="Self.fk_po_kl">
+      <End Role="KLIENTI" EntitySet="KLIENTI" />
+      <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

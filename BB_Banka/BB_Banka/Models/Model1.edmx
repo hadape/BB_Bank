@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KalkulaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BROKERI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ico" Type="int" />
+          <Property Name="start_datum" Type="date" />
+          <Property Name="aktivni" Type="int" />
+          <Property Name="nazev" Type="varchar" MaxLength="256" />
+          <Property Name="soubor" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="KLIENTI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="telefon" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="jmeno" Type="varchar" MaxLength="256" />
+          <Property Name="prijmeni" Type="varchar" MaxLength="256" />
+          <Property Name="email" Type="varchar" MaxLength="256" />
+          <Property Name="bydliste" Type="varchar" MaxLength="256" />
+          <Property Name="narozen" Type="date" />
+          <Property Name="rodne_cislo" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="KONTAKTY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pozadavek_id" Type="int" Nullable="false" />
+          <Property Name="datum" Type="date" Nullable="false" />
+          <Property Name="vysledek" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POZADAVKY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="broker_id" Type="int" />
+          <Property Name="klient_id" Type="int" />
+          <Property Name="castka" Type="int" Nullable="false" />
+          <Property Name="mesice" Type="int" Nullable="false" />
+          <Property Name="vysledek" Type="int" />
+          <Property Name="poznamka" Type="varchar" MaxLength="256" />
+          <Property Name="rpsn" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="spl_mesic" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="spl_celkem" Type="decimal" Precision="9" Scale="2" />
+        </EntityType>
+        <Association Name="fk_ko_po">
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="1" />
+          <End Role="KONTAKTY" Type="Self.KONTAKTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POZADAVKY">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="KONTAKTY">
+              <PropertyRef Name="pozadavek_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_po_br">
+          <End Role="BROKERI" Type="Self.BROKERI" Multiplicity="0..1" />
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BROKERI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="POZADAVKY">
+              <PropertyRef Name="broker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_po_kl">
+          <End Role="KLIENTI" Type="Self.KLIENTI" Multiplicity="0..1" />
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KLIENTI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="POZADAVKY">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KalkulaceModelStoreContainer">
+          <EntitySet Name="BROKERI" EntityType="Self.BROKERI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KLIENTI" EntityType="Self.KLIENTI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KONTAKTY" EntityType="Self.KONTAKTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POZADAVKY" EntityType="Self.POZADAVKY" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_ko_po" Association="Self.fk_ko_po">
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+            <End Role="KONTAKTY" EntitySet="KONTAKTY" />
+          </AssociationSet>
+          <AssociationSet Name="fk_po_br" Association="Self.fk_po_br">
+            <End Role="BROKERI" EntitySet="BROKERI" />
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+          </AssociationSet>
+          <AssociationSet Name="fk_po_kl" Association="Self.fk_po_kl">
+            <End Role="KLIENTI" EntitySet="KLIENTI" />
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KalkulaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BROKERI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ico" Type="Int32" />
+          <Property Name="start_datum" Type="DateTime" Precision="0" />
+          <Property Name="aktivni" Type="Int32" />
+          <Property Name="nazev" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="soubor" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="POZADAVKY" Relationship="Self.fk_po_br" FromRole="BROKERI" ToRole="POZADAVKY" />
+        </EntityType>
+        <EntityType Name="KLIENTI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="telefon" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jmeno" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="prijmeni" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="bydliste" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="narozen" Type="DateTime" Precision="0" />
+          <Property Name="rodne_cislo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="POZADAVKY" Relationship="Self.fk_po_kl" FromRole="KLIENTI" ToRole="POZADAVKY" />
+        </EntityType>
+        <EntityType Name="KONTAKTY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pozadavek_id" Type="Int32" Nullable="false" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="vysledek" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="POZADAVKY" Relationship="Self.fk_ko_po" FromRole="KONTAKTY" ToRole="POZADAVKY" />
+        </EntityType>
+        <EntityType Name="POZADAVKY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="broker_id" Type="Int32" />
+          <Property Name="klient_id" Type="Int32" />
+          <Property Name="castka" Type="Int32" Nullable="false" />
+          <Property Name="mesice" Type="Int32" Nullable="false" />
+          <Property Name="vysledek" Type="Int32" />
+          <Property Name="poznamka" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="rpsn" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="spl_mesic" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="spl_celkem" Type="Decimal" Precision="9" Scale="2" />
+          <NavigationProperty Name="BROKERI" Relationship="Self.fk_po_br" FromRole="POZADAVKY" ToRole="BROKERI" />
+          <NavigationProperty Name="KLIENTI" Relationship="Self.fk_po_kl" FromRole="POZADAVKY" ToRole="KLIENTI" />
+          <NavigationProperty Name="KONTAKTY" Relationship="Self.fk_ko_po" FromRole="POZADAVKY" ToRole="KONTAKTY" />
+        </EntityType>
+        <Association Name="fk_po_br">
+          <End Role="BROKERI" Type="Self.BROKERI" Multiplicity="0..1" />
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BROKERI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="POZADAVKY">
+              <PropertyRef Name="broker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_po_kl">
+          <End Role="KLIENTI" Type="Self.KLIENTI" Multiplicity="0..1" />
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KLIENTI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="POZADAVKY">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ko_po">
+          <End Role="POZADAVKY" Type="Self.POZADAVKY" Multiplicity="1" />
+          <End Role="KONTAKTY" Type="Self.KONTAKTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POZADAVKY">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="KONTAKTY">
+              <PropertyRef Name="pozadavek_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KalkulaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BROKERI" EntityType="Self.BROKERI" />
+          <EntitySet Name="KLIENTI" EntityType="Self.KLIENTI" />
+          <EntitySet Name="KONTAKTY" EntityType="Self.KONTAKTY" />
+          <EntitySet Name="POZADAVKY" EntityType="Self.POZADAVKY" />
+          <AssociationSet Name="fk_po_br" Association="Self.fk_po_br">
+            <End Role="BROKERI" EntitySet="BROKERI" />
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+          </AssociationSet>
+          <AssociationSet Name="fk_po_kl" Association="Self.fk_po_kl">
+            <End Role="KLIENTI" EntitySet="KLIENTI" />
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ko_po" Association="Self.fk_ko_po">
+            <End Role="POZADAVKY" EntitySet="POZADAVKY" />
+            <End Role="KONTAKTY" EntitySet="KONTAKTY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KalkulaceModelStoreContainer" CdmEntityContainer="KalkulaceEntities">
+          <EntitySetMapping Name="BROKERI">
+            <EntityTypeMapping TypeName="KalkulaceModel.BROKERI">
+              <MappingFragment StoreEntitySet="BROKERI">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ico" ColumnName="ico" />
+                <ScalarProperty Name="start_datum" ColumnName="start_datum" />
+                <ScalarProperty Name="aktivni" ColumnName="aktivni" />
+                <ScalarProperty Name="nazev" ColumnName="nazev" />
+                <ScalarProperty Name="soubor" ColumnName="soubor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KLIENTI">
+            <EntityTypeMapping TypeName="KalkulaceModel.KLIENTI">
+              <MappingFragment StoreEntitySet="KLIENTI">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="jmeno" ColumnName="jmeno" />
+                <ScalarProperty Name="prijmeni" ColumnName="prijmeni" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="bydliste" ColumnName="bydliste" />
+                <ScalarProperty Name="narozen" ColumnName="narozen" />
+                <ScalarProperty Name="rodne_cislo" ColumnName="rodne_cislo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KONTAKTY">
+            <EntityTypeMapping TypeName="KalkulaceModel.KONTAKTY">
+              <MappingFragment StoreEntitySet="KONTAKTY">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pozadavek_id" ColumnName="pozadavek_id" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="vysledek" ColumnName="vysledek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POZADAVKY">
+            <EntityTypeMapping TypeName="KalkulaceModel.POZADAVKY">
+              <MappingFragment StoreEntitySet="POZADAVKY">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="broker_id" ColumnName="broker_id" />
+                <ScalarProperty Name="klient_id" ColumnName="klient_id" />
+                <ScalarProperty Name="castka" ColumnName="castka" />
+                <ScalarProperty Name="mesice" ColumnName="mesice" />
+                <ScalarProperty Name="vysledek" ColumnName="vysledek" />
+                <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+                <ScalarProperty Name="rpsn" ColumnName="rpsn" />
+                <ScalarProperty Name="spl_mesic" ColumnName="spl_mesic" />
+                <ScalarProperty Name="spl_celkem" ColumnName="spl_celkem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

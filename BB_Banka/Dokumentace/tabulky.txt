@@ -1,0 +1,48 @@
+CREATE TABLE KLIENT
+(
+id int identity(1,1) PRIMARY KEY,
+telefon varchar(256) UNIQUE not null,
+jmeno varchar(256),
+prijmeni varchar(256),
+email varchar(256),
+bydliste varchar(256), 
+narozen date,
+rodne_cislo varchar(30),
+bydliste varchar(256),
+
+);
+
+CREATE TABLE POZADAVKY
+(
+id int identity(1,1) PRIMARY KEY,
+broker_id int,
+klient_id int,
+castka int not null,
+mesice int not null,
+vysledek int,
+poznamka varchar(256),
+rpsn DECIMAL(4,2),
+spl_mesic DECIMAL(8,2),
+spl_celkem DECIMAL(9,2),
+)
+;
+CREATE TABLE BROKER
+(
+id int identity(1,1) PRIMARY KEY,
+ico int,
+start_datum date,
+aktivni bool,
+nazev varcchar(256),
+soubor varchar(256)
+);
+CREATE TABLE KONTAKTY
+(
+id int identity(1,1) PRIMARY KEY,
+pozadavek_id int not null,
+datum date not null,
+vysledek int not null,
+);
+ALTER TABLE POZADAVKY ADD CONSTRAINT fk_po_kl FOREIGN KEY(klient_id) REFERENCES KLIENT(id);
+ALTER TABLE POZADAVKY ADD CONSTRAINT fk_po_br FOREIGN KEY(broker_id) REFERENCES BROKER(id);
+ALTER TABLE KONTAKTY ADD CONSTRAINT fk_ko_po FOREIGN KEY(pozadavek_id) REFERENCES POZADAVKY(id);
+

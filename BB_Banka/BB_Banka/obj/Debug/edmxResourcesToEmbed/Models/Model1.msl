@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KalkulaceModelStoreContainer" CdmEntityContainer="KalkulaceEntities">
+    <EntitySetMapping Name="BROKERI">
+      <EntityTypeMapping TypeName="KalkulaceModel.BROKERI">
+        <MappingFragment StoreEntitySet="BROKERI">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ico" ColumnName="ico" />
+          <ScalarProperty Name="start_datum" ColumnName="start_datum" />
+          <ScalarProperty Name="aktivni" ColumnName="aktivni" />
+          <ScalarProperty Name="nazev" ColumnName="nazev" />
+          <ScalarProperty Name="soubor" ColumnName="soubor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KLIENTI">
+      <EntityTypeMapping TypeName="KalkulaceModel.KLIENTI">
+        <MappingFragment StoreEntitySet="KLIENTI">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="jmeno" ColumnName="jmeno" />
+          <ScalarProperty Name="prijmeni" ColumnName="prijmeni" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="bydliste" ColumnName="bydliste" />
+          <ScalarProperty Name="narozen" ColumnName="narozen" />
+          <ScalarProperty Name="rodne_cislo" ColumnName="rodne_cislo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KONTAKTY">
+      <EntityTypeMapping TypeName="KalkulaceModel.KONTAKTY">
+        <MappingFragment StoreEntitySet="KONTAKTY">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pozadavek_id" ColumnName="pozadavek_id" />
+          <ScalarProperty Name="datum" ColumnName="datum" />
+          <ScalarProperty Name="vysledek" ColumnName="vysledek" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POZADAVKY">
+      <EntityTypeMapping TypeName="KalkulaceModel.POZADAVKY">
+        <MappingFragment StoreEntitySet="POZADAVKY">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="broker_id" ColumnName="broker_id" />
+          <ScalarProperty Name="klient_id" ColumnName="klient_id" />
+          <ScalarProperty Name="castka" ColumnName="castka" />
+          <ScalarProperty Name="mesice" ColumnName="mesice" />
+          <ScalarProperty Name="vysledek" ColumnName="vysledek" />
+          <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+          <ScalarProperty Name="rpsn" ColumnName="rpsn" />
+          <ScalarProperty Name="spl_mesic" ColumnName="spl_mesic" />
+          <ScalarProperty Name="spl_celkem" ColumnName="spl_celkem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
