@@ -23,25 +23,64 @@ namespace BB_Banka
             return context.POZADAVKY.ToList();
         }
 
-        //public Student GetStudent(int id)
-        //{
-        //    return context.Students.First(s => s.Id == id);
-        //}
+        public decimal PridejPozadavky(string telcis,string email, int pujcka, int mesice, string jmeno, string prijmeni, string poznamka, int broker_id)
+        {
+            KLIENTI a = new KLIENTI();
+            a.telefon = telcis;
+            a.email = email;
+            a.jmeno = jmeno;
+            a.prijmeni = prijmeni;
 
-        //public void DeleteStudent(int id)
-        //{
+            bool duplikat=false;
+            foreach (KLIENTI klient in context.KLIENTI)
+            {
+               
+                if (klient.telefon == telcis)
+                {
+                    duplikat = true;
+                }
+            }
+            POZADAVKY p = new POZADAVKY();
+            if (duplikat != true)
+            {
+                context.KLIENTI.Add(a);
+                p.klient_id = a.id;
+            }
+            else
+            {
+                p.klient_id = context.KLIENTI.Where(kli => kli.telefon == telcis).First().id;
+            }
 
-        //    context.Students.Remove(context.Students.First(s => s.Id == id));
-        //    context.SaveChanges();
-        //}
+            
 
-        //public Student AddStudent(Student student)
-        //{
-        //    context.Students.Add(student);
-        //    context.SaveChanges();
-        //    return student;
+            p.castka = pujcka;
+            if (context.BROKERI.Where(bro => bro.id == broker_id).First().aktivni == 1)
+            {
+                
+                p.broker_id = context.BROKERI.Where(bro => bro.id == broker_id).First().id;
+            }
+            else
+            {
+                p.broker_id = 1;
+            }
+            Random rn = new Random();
+            decimal cerskrin = (decimal)rn.NextDouble();
+            p.spl_celkem = pujcka * cerskrin;
+            p.rpsn = cerskrin;
+            p.poznamka = poznamka;
+            p.spl_mesic = p.spl_celkem / mesice;
 
-        //}
+            context.POZADAVKY.Add(p);
+            
+            context.SaveChanges();
+            return (decimal)p.spl_mesic;
+        }
+        public POZADAVKY GetPozadavek(int id)
+        {
+            POZADAVKY local = context.POZADAVKY.Where(poz => poz.id == id).First();
+            return local;
+        }
+       
 
     }
 
