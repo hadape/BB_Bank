@@ -9,14 +9,18 @@
 
 namespace BB_Banka.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Script.Serialization;
+    using System.Xml.Serialization;
+
     public partial class POZADAVKY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public POZADAVKY()
         {
+            
             this.KONTAKTY = new HashSet<KONTAKTY>();
         }
     
@@ -34,6 +38,7 @@ namespace BB_Banka.Models
         public virtual BROKERI BROKERI { get; set; }
         public virtual KLIENTI KLIENTI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<KONTAKTY> KONTAKTY { get; set; }
     }
 }

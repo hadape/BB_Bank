@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BB_Banka.Classes;
+using BB_Banka.Models;
+using BB_Banka.Servisy;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +13,18 @@ namespace BB_Banka
 {
     public class BankaController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        
+        public void GetZmenBrokera(int id, int stav)
         {
-            return new string[] { "value1", "value2" };
+            ServisCallCenter banka = new ServisCallCenter();
+            banka.ZmenStavBroker(id, stav);
+         
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public void Update(Pozadavek pozadavek, Klient klient)
         {
-            return "value";
-        }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
         }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+      
     }
 }
