@@ -33,7 +33,7 @@ namespace BB_Banka
             ServisBroker ser = new ServisBroker();
             int id = ser.PridejBrokera(value).id;
 
-            
+            // pokus
 
             var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
             //byte[] data = File.ReadAllBytes(fn);
