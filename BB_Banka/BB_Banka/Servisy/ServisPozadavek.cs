@@ -23,25 +23,7 @@ namespace BB_Banka
             return context.POZADAVKY.ToList();
         }
 
-        //public Student GetStudent(int id)
-        //{
-        //    return context.Students.First(s => s.Id == id);
-        //}
-
-        //public void DeleteStudent(int id)
-        //{
-
-        //    context.Students.Remove(context.Students.First(s => s.Id == id));
-        //    context.SaveChanges();
-        //}
-
-        //public Student AddStudent(Student student)
-        //{
-        //    context.Students.Add(student);
-        //    context.SaveChanges();
-        //    return student;
-
-        //}
+    
 
     }
 
