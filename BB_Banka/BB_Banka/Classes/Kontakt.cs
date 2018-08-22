@@ -9,7 +9,6 @@ namespace BB_Banka.Classes
 {
     public class Kontakt
     {
-        
         public int id { get; set; }
         public int pozadavek_id { get; set; }
         public System.DateTime datum { get; set; }
@@ -26,7 +25,5 @@ namespace BB_Banka.Classes
             this.Pozadavky = new Pozadavek().ToPozadavek(kontakt.POZADAVKY);
             return this;
         }
-
     }
-
 }

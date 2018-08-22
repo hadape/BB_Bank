@@ -13,17 +13,17 @@ namespace BB_Banka
 {
     public class BankaController : ApiController
     {
-        
+        private static ServisCallCenter banka = new ServisCallCenter();
         public void GetZmenBrokera(int id, int stav)
         {
-            ServisCallCenter banka = new ServisCallCenter();
+            
             banka.ZmenStavBroker(id, stav);
          
         }
-
-        public void Update(Pozadavek pozadavek, Klient klient)
+        [HttpPost]
+        public void Update(VstupCallCentrum vstup)
         {
-
+            banka.UpdateData(vstup);
         }
       
     }

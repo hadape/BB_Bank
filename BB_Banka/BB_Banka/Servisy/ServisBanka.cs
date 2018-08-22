@@ -27,17 +27,25 @@ namespace BB_Banka.Servisy
             return entities.BROKERI.Where(brk => brk.id == id).First(); 
         }
 
-        public void UpdateData(Pozadavek pozadavek, Klient klient)
+        public void UpdateData(VstupCallCentrum vstup)
         {
-            POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == pozadavek.id).First();
-            KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == klient.id).First();
-            update_klient.jmeno = klient.jmeno;
-            update_klient.narozen = klient.narozen;
-            update_klient.prijmeni = klient.prijmeni;
-            update_klient.rodne_cislo = klient.rodne_cislo;
-            update_klient.telefon = klient.telefon;
-            update_klient.email = klient.telefon;
-            update_klient.bydliste = klient.bydliste;
+            POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
+            KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
+            KONTAKTY novy_kontakt = new KONTAKTY();
+            novy_kontakt.datum = vstup.datum;
+            novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+            novy_kontakt.vysledek = vstup.vysledek;
+            entities.KONTAKTY.Add(novy_kontakt);
+            update_klient.jmeno = vstup.jmeno;
+            update_klient.narozen = vstup.narozen;
+            update_klient.prijmeni = vstup.prijmeni;
+            update_klient.rodne_cislo = vstup.rodne_cislo;
+            update_klient.telefon = vstup.telefon;
+            update_klient.email = vstup.email;
+            update_klient.bydliste = vstup.bydliste;
+            update_pozadavek.vysledek = vstup.vysledek;
+            entities.SaveChanges();
+           
 
         }
     }

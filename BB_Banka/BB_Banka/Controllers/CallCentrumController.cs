@@ -1,4 +1,5 @@
-﻿using BB_Banka.Models;
+﻿using BB_Banka.Classes;
+using BB_Banka.Models;
 using BB_Banka.Servisy;
 using System;
 using System.Collections;
@@ -13,17 +14,17 @@ namespace BB_Banka
     public class CallCentrumController : ApiController
     {
         private static ServisCallcentrum callcentrum = new ServisCallcentrum();
-        
+        private static ServisCallCenter banka = new ServisCallCenter();
+
         public List<Pozadavek> GetPozadavky()
         {
             
-            //List<POZADAVKY> result = callcentrum.ZiskejPozadavek();
-            //string vysledek = null;
-            //foreach (POZADAVKY p in result)
-            //{
-            //    vysledek += $"Pozadavek id: {p.id}, Castka: {p.castka} /n Klient Jmeno: {p.KLIENTI.jmeno} Telefon: {p.KLIENTI.telefon}";
-            //}
             return callcentrum.ZiskejPozadavek();
+        }
+        [HttpPost]
+        public void Update(VstupCallCentrum vstup)
+        {
+            banka.UpdateData(vstup);
         }
     }
 }
