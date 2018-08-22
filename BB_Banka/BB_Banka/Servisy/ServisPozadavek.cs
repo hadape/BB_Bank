@@ -23,28 +23,64 @@ namespace BB_Banka
             return context.POZADAVKY.ToList();
         }
 
-        public decimal PridejPozadavky(string telcis,string email, int pujcka, int mesice, string jmeno, string prijmeni, string poznamka)
+        public decimal PridejPozadavky(string telcis,string email, int pujcka, int mesice, string jmeno, string prijmeni, string poznamka, int broker_id)
         {
             KLIENTI a = new KLIENTI();
             a.telefon = telcis;
             a.email = email;
-            Console.WriteLine(telcis);
             a.jmeno = jmeno;
             a.prijmeni = prijmeni;
-            context.KLIENTI.Add(a);
+
+            bool duplikat=false;
+            foreach (KLIENTI klient in context.KLIENTI)
+            {
+               
+                if (klient.telefon == telcis)
+                {
+                    duplikat = true;
+                }
+            }
             POZADAVKY p = new POZADAVKY();
-            p.klient_id = a.id;
+            if (duplikat != true)
+            {
+                context.KLIENTI.Add(a);
+                p.klient_id = a.id;
+            }
+            else
+            {
+                p.klient_id = context.KLIENTI.Where(kli => kli.telefon == telcis).First().id;
+            }
+
+            
+
             p.castka = pujcka;
-            Random rn = new Random();//smazat
-            p.spl_celkem = pujcka * (decimal)rn.NextDouble();//upravit
+            if (context.BROKERI.Where(bro => bro.id == broker_id).First().aktivni == 1)
+            {
+                
+                p.broker_id = context.BROKERI.Where(bro => bro.id == broker_id).First().id;
+            }
+            else
+            {
+                p.broker_id = 1;
+            }
+            Random rn = new Random();
+            decimal cerskrin = (decimal)rn.NextDouble();
+            p.spl_celkem = pujcka * cerskrin;
+            p.rpsn = cerskrin;
             p.poznamka = poznamka;
             p.spl_mesic = p.spl_celkem / mesice;
-           
+
             context.POZADAVKY.Add(p);
             
             context.SaveChanges();
             return (decimal)p.spl_mesic;
         }
+        public POZADAVKY GetPozadavek(int id)
+        {
+            POZADAVKY local = context.POZADAVKY.Where(poz => poz.id == id).First();
+            return local;
+        }
+       
 
     }
 

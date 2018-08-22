@@ -16,16 +16,28 @@ namespace BB_Banka
         {
             
             ServisPozadavek SP = new ServisPozadavek();
-            decimal ab=SP.PridejPozadavky(a.telcis,a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka);
+            decimal ab=SP.PridejPozadavky(a.telcis,a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka,a.brokerid);
             ab = Math.Round(ab, 2);
             return new string[] { ab.ToString()};
         }
 
         // GET api/<controller>/5
         [HttpGet]
-        public string Get(int id)
+        public Pozadavek Get(int id)
         {
-            return "value";
+            Pozadavek pp = new Pozadavek();
+            ServisPozadavek SP = new ServisPozadavek();
+            pp.id = SP.GetPozadavek(id).id;
+            pp.k_id = SP.GetPozadavek(id).klient_id;
+            pp.b_id = SP.GetPozadavek(id).broker_id;
+            pp.doba = SP.GetPozadavek(id).mesice;
+            pp.castka = SP.GetPozadavek(id).castka;
+            pp.RPSN = SP.GetPozadavek(id).rpsn;
+            pp.poznamka = SP.GetPozadavek(id).poznamka;
+            pp.mes_splatka = SP.GetPozadavek(id).spl_mesic;
+            pp.cel_splatka = SP.GetPozadavek(id).spl_celkem;
+
+            return pp;
         }
 
         // POST api/<controller>
@@ -58,4 +70,16 @@ namespace BB_Banka
         public int brokerid;
         public string email;
             }
+    public class Pozadavek
+    {
+        public int id;
+        public int? b_id;
+        public int doba;
+        public int? k_id;
+        public int castka;
+        public decimal? RPSN;
+        public string poznamka;
+        public decimal? mes_splatka;
+        public decimal? cel_splatka;
+    }
 }
