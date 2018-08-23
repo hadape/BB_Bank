@@ -27,7 +27,10 @@ namespace BB_Banka
         public BROKERI PridejBrokera(BROKERI value)
         {
             BROKERI x = new BROKERI();
+            x.ico = value.ico;
             x.nazev = value.nazev;
+            x.aktivni = value.aktivni;
+            x.start_datum = Convert.ToDateTime(value.start_datum);
             context.BROKERI.Add(x);
             context.SaveChanges();
             return x;
