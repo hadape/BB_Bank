@@ -10,6 +10,10 @@ using BB_Banka.Models;
 
 namespace BB_Banka
 {
+
+
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     public class BrokerController : ApiController
     {
         
@@ -33,16 +37,36 @@ namespace BB_Banka
             ServisBroker ser = new ServisBroker();
             int id = ser.PridejBrokera(value).id;
 
-            
+            byte[] data; //Třídní proměnná pole byte pro konverzi z např. PDF souboru
 
-            var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
-            byte[] data = File.ReadAllBytes(fn);
+            string xx;
+
+
+
+
+            try
+            {
+                var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
+                data = File.ReadAllBytes(fn);
+                var outFn = HostingEnvironment.MapPath("~/App_Data/Copysmlouvy.pdf");
+                System.IO.File.WriteAllBytes(outFn, data);
+            }
+            catch (Exception e)
+            {
+
+                throw new FileNotFoundException("name", "soubor smlouvy nenalezen," +
+                    " nebo soubor výstupu kopie smlouvy otevřen v jiném programu");
+
+            }
+
+                       
+
             //string data = "nutno odremovat řádek nad tím";
             return new
             {
-                //stav = value,
+                //stav = xx,
                 extension = "pdf",
-                id = id,
+                idBrokera  = id,
                 smlouva = data,
             };
         }

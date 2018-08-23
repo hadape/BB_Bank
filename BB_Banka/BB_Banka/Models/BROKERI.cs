@@ -27,7 +27,7 @@ namespace BB_Banka.Models
         public Nullable<int> aktivni { get; set; }
         public string nazev { get; set; }
         public string soubor { get; set; }
-    
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<POZADAVKY> POZADAVKY { get; set; }

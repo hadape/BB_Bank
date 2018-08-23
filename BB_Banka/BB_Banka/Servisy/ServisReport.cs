@@ -10,6 +10,9 @@ using System.Web.Hosting;
 
 namespace BB_Banka.Servisy
 {
+    /// <summary>
+    /// Třída obsluhující požadavky, na reporty,které přicházejí skrze kontrolér report
+    /// </summary>
     public class ServisReport
     {
 
@@ -20,15 +23,15 @@ namespace BB_Banka.Servisy
             context = new KalkulaceEntities(); //celá struktura databáze
         }
 
-        public IEnumerable<Object> GetReport(int id)
+        public IEnumerable<Object> GetReport(string id)
 
         {
             IQueryable<IGrouping<string, POZADAVKY>> grps;
             var poz = context.POZADAVKY;
-            if (id == 1) grps = poz.GroupBy(p => p.broker_id.ToString());
-            else if (id == 2) grps = poz.Select(p => new { Vek = EntityFunctions.DiffYears(p.KLIENTI.narozen, DateTime.Now), Pozadavek = p })
+            if (id == "dlebrokera") grps = poz.GroupBy(p => p.broker_id.ToString());
+            else if (id == "dleveku") grps = poz.Select(p => new { Vek = EntityFunctions.DiffYears(p.KLIENTI.narozen, DateTime.Now), Pozadavek = p })
                     .GroupBy(itm => itm.Vek < 30 ? "0-29" : itm.Vek < 60 ? "30-59" : "59+", itm => itm.Pozadavek);
-            else if (id == 3) grps = poz.GroupBy(p => p.castka < 200000 ? "0-200 000" : p.castka < 300000 ? "200 000 - 300 000" :
+            else if (id == "dlepujcky") grps = poz.GroupBy(p => p.castka < 200000 ? "0-200 000" : p.castka < 300000 ? "200 000 - 300 000" :
                                                     p.castka < 500000 ? "300 000 - 500 000" : "500 000+");
             else return new List<Object>();
 
@@ -45,6 +48,7 @@ namespace BB_Banka.Servisy
             var outFn = HostingEnvironment.MapPath("~/App_Data/report.html");
             var html = File.ReadAllText(fn);
 
+            //převede do jsona
             var labelsJson = JsonConvert.SerializeObject(labels);
             var dataJson = JsonConvert.SerializeObject(new List<Object> { data1, data2});
 
@@ -54,15 +58,7 @@ namespace BB_Banka.Servisy
             File.WriteAllText(outFn, html);
 
             return stats;
-            //{
-            //    return context.POZADAVKY.GroupBy(p => p.broker_id)
-            //        .Select(g => new
-//{ Group = g.Key, Avg = g.Average(p => p.spl_celkem), Count = g.Count() }).ToList();
-            //}
-            //else if (id == 2) return context.POZADAVKY.Where(x => x.id == id).ToList();
-            //else if (id == 3) return context.POZADAVKY.Where(x => x.id == id).ToList();
-
-            //else return context.POZADAVKY.ToList();
+          
         }
 
 
