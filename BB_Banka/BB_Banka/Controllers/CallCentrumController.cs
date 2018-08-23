@@ -16,7 +16,7 @@ namespace BB_Banka
         private static ServisCallcentrum callcentrum = new ServisCallcentrum();
         private static ServisCallCenter banka = new ServisCallCenter();
 
-        public List<Pozadavek> GetPozadavky()
+        public List<Pozadavek> GetZiskejPozadavky()
         {
             
             return callcentrum.ZiskejPozadavek();

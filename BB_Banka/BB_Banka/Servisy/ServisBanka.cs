@@ -8,10 +8,18 @@ using System.Web;
 
 namespace BB_Banka.Servisy
 {
+    /// <summary>
+    /// Třída obsluhující požadavky z controloru z banky (+1 z callcentra)
+    /// </summary>
     public class ServisCallCenter
     {
         private KalkulaceEntities entities = new KalkulaceEntities();
 
+        /// <summary>
+        /// Zmení stav brokera 1 - aktivní, 0 - neaktivní
+        /// </summary>
+        /// <param name="id">Id brokera</param>
+        /// <param name="stav">Stav, který chceme nastavit</param>
         public void ZmenStavBroker(int id, int stav)
         {
             BROKERI zmena = entities.BROKERI.Where(brk => brk.id == id).First();
@@ -19,14 +27,12 @@ namespace BB_Banka.Servisy
             entities.SaveChanges();
         }
 
-
-
-        public BROKERI VratBrokera(int id)
-        {
-
-            return entities.BROKERI.Where(brk => brk.id == id).First();
-        }
-
+        /// <summary>
+        /// Updatuje data o požadavku, klientovy a zapisuje aktivitu o kontaktu se zákazníkem
+        /// </summary>
+        /// <param name="vstup">Informace získané z JSON na vstupu v objektu VstupCallCentrum</param>
+        /// <returns>Object KeeperStatus</returns>
+        /// <exception cref="Exception">Zadané datum u provedení kontaktu je neplatné, update nebyl proveden</exception>
         public KeeperStatus UpdateData(VstupCallCentrum vstup)
         {
             DateTime neplatne = new DateTime(0001, 01, 01);
@@ -68,6 +74,22 @@ namespace BB_Banka.Servisy
             }
 
         }
+        /// <summary>
+        /// Vrátí brokera s požadovanýcm id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Broker</returns>
+        public BROKERI VratBrokera(int id)
+        {
+
+            return entities.BROKERI.Where(brk => brk.id == id).First();
+        }
+        /// <summary>
+        /// Zapisuje datum do objektu Klient
+        /// </summary>
+        /// <param name="date">Datum</param>
+        /// <param name="kl">Klient</param>
+        /// <exception cref="Exception">Datum narození není ve správném formátu, ostatní informace aktualizovany</exception>
         public void vlozDatum(DateTime? date, KLIENTI kl) { 
             
                

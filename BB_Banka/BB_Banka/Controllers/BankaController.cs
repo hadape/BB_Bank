@@ -11,10 +11,21 @@ using System.Web.Http;
 
 namespace BB_Banka
 {
+    /// <summary>
+    /// Třída, která příjmá vstupy a odesílá vyýstupy
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     public class BankaController : ApiController
     {
         private static ServisCallCenter banka = new ServisCallCenter();
-        public KeeperStatus GetZmenBrokera(int id, int stav)
+        /// <summary>
+        /// Volá metodu ze servisy pro změnu stavu brokera
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="stav">Stav brokera</param>
+        /// <returns>Object KeeperStatus</returns>
+        /// <exception cref="Exception"></exception>
+        public KeeperStatus GetZmenStavBroker(int id, int stav)
         {
             KeeperStatus status = new KeeperStatus();
             try
@@ -43,6 +54,11 @@ namespace BB_Banka
             
 
         }
+        /// <summary>
+        /// Updates the specified vstup.
+        /// </summary>
+        /// <param name="vstup">JSON</param>
+        /// <returns>Object KeeperStatus</returns>
         [HttpPost]
         public KeeperStatus Update(VstupCallCentrum vstup)
         {
