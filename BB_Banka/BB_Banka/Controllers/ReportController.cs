@@ -12,7 +12,7 @@ namespace BB_Banka
     {
         // GET api/<controller>/id
         // id rozhoduje o typu reportu 1 věk, 2 broker, 3 částka
-        public IEnumerable<object> Get(int id) 
+        public IEnumerable<object> Get(string id) 
         {
            return new ServisReport().GetReport(id).ToList();
                

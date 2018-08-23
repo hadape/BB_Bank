@@ -37,6 +37,10 @@ namespace BB_Banka
 
             var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
             byte[] data = File.ReadAllBytes(fn);
+
+            var outFn = HostingEnvironment.MapPath("~/App_Data/Copysmlouvy.pdf");
+            System.IO.File.WriteAllBytes(outFn, data);
+
             //string data = "nutno odremovat řádek nad tím";
             return new
             {
