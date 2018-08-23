@@ -22,9 +22,9 @@ namespace BB_Banka
             return callcentrum.ZiskejPozadavek();
         }
         [HttpPost]
-        public void Update(VstupCallCentrum vstup)
+        public string Update(VstupCallCentrum vstup)
         {
-            banka.UpdateData(vstup);
+            return banka.UpdateData(vstup);
         }
     }
 }

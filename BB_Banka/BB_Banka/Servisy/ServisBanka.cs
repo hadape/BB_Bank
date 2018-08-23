@@ -35,7 +35,6 @@ namespace BB_Banka.Servisy
                 POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
                 KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
                 KONTAKTY novy_kontakt = new KONTAKTY();
-                vlozDatum(vstup.datum, novy_kontakt);
                 if (vstup.datum == neplatne)
                 {
                     throw new Exception("Zadané datum u provedení kontaktu je neplatné, update nebyl proveden");
@@ -45,7 +44,8 @@ namespace BB_Banka.Servisy
                 novy_kontakt.vysledek = vstup.vysledek;
                 entities.KONTAKTY.Add(novy_kontakt);
                 update_klient.jmeno = vstup.jmeno;
-                update_klient.narozen = vstup.narozen;
+                vlozDatum(vstup.narozen, update_klient);
+                //update_klient.narozen = vstup.narozen;
                 update_klient.prijmeni = vstup.prijmeni;
                 update_klient.rodne_cislo = vstup.rodne_cislo;
                 update_klient.email = vstup.email;
@@ -54,9 +54,9 @@ namespace BB_Banka.Servisy
                 entities.SaveChanges();
                 return "Změna provedena úspěšně";
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
-                return e.Message;
+                return $"ID požadavku, nebo klienta neexistuje, update neproveden";
             }
             catch (Exception e)
             {
@@ -64,14 +64,14 @@ namespace BB_Banka.Servisy
             }
 
         }
-        public void vlozDatum(DateTime date, KLIENTI kl) { 
+        public void vlozDatum(DateTime? date, KLIENTI kl) { 
             
                 DateTime neplatne = new DateTime(0001, 01, 01);
-                if (date == neplatne)
+                if (date is null)
                 {
-                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
+                    throw new Exception("Datum narození není ve správném formátu, ostatní informace aktualizovany");
                 }
-                kl.datum = date;
+                kl.narozen = date;
             
             
         }
