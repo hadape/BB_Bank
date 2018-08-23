@@ -1,14 +1,17 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BB_Banka.Classes
 {
+    /// <summary>
+    /// Třída pro příjem Jsona z CallCentra a manipulaci s ním
+    /// </summary>
     public class VstupCallCentrum
     {
         
-        public Nullable<int> broker_id { get; set; }
+        
         public Nullable<int> klient_id { get; set; }
         public string poznamka { get; set; }
         public string telefon { get; set; }

@@ -7,6 +7,9 @@ using System.Web;
 
 namespace BB_Banka.Servisy
 {
+    /// <summary>
+    /// Třída požadavky pro konvertování z EF
+    /// </summary>
     public class Pozadavek
     {
         public int id { get; set; }
@@ -21,8 +24,13 @@ namespace BB_Banka.Servisy
         public Nullable<decimal> spl_celkem { get; set; }
         public virtual Broker Broker { get; set; }
         public virtual Klient Klient { get; set; }
-        
 
+
+        /// <summary>
+        /// Přetypovává objekt POZADAVKY z EF na třídu Pozadavky
+        /// </summary>
+        /// <param name="pozadavek">Objekt typu POZADAVKY na přetypování</param>
+        /// <returns>Vrátí přetypovaný požadavek, objekt Pozadavek</returns>
         public Pozadavek ToPozadavek(POZADAVKY pozadavek)
         {
             

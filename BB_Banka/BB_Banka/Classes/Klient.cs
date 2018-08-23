@@ -6,6 +6,9 @@ using System.Web;
 
 namespace BB_Banka.Classes
 {
+    /// <summary>
+    /// Třída klient pro konvertování z EF
+    /// </summary>
     public class Klient
     {
         public int id { get; set; }
@@ -17,6 +20,11 @@ namespace BB_Banka.Classes
         public Nullable<System.DateTime> narozen { get; set; }
         public string rodne_cislo { get; set; }
 
+        /// <summary>
+        /// Přetypovává objekt KLIENTI z EF na třídu Klient
+        /// </summary>
+        /// <param name="klient">Objekt typu KLIENTI na přetypování</param>
+        /// <returns>Vrátí přetypovaného klienta, objekt Klient</returns>
         public Klient ToKlient (KLIENTI klient)
         {
             this.id = klient.id;
