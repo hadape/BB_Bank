@@ -186,6 +186,7 @@ namespace BB_Banka
                 return 0; }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// testovací metoda pro vyhození požadavku podle identifikátoru
         /// </summary>
@@ -197,6 +198,9 @@ namespace BB_Banka
             return local;
         }
        
+=======
+    
+>>>>>>> Požadavky, brokeři, reporty, graf
 
     }
 

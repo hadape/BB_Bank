@@ -36,8 +36,13 @@ namespace BB_Banka
             
 
             var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
+<<<<<<< HEAD
             byte[] data = File.ReadAllBytes(fn);
             //string data = "nutno odremovat řádek nad tím";
+=======
+            //byte[] data = File.ReadAllBytes(fn);
+            string data = "nutno odremovat řádek nad tím";
+>>>>>>> Požadavky, brokeři, reporty, graf
             return new
             {
                 //stav = value,
