@@ -10,6 +10,9 @@ using System.Web.Hosting;
 
 namespace BB_Banka.Servisy
 {
+    /// <summary>
+    /// Třída obsluhující požadavky, na reporty,které přicházejí skrze kontrolér report
+    /// </summary>
     public class ServisReport
     {
 
