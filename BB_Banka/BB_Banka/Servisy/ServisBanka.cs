@@ -5,11 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BB_Banka.Models;
 
 namespace BB_Banka.Servisy
 {
     public class ServisCallCenter
     {
+<<<<<<< HEAD
         private KalkulaceEntities entities = new KalkulaceEntities();
 
         public void ZmenStavBroker (int id, int stav)
@@ -73,6 +75,11 @@ namespace BB_Banka.Servisy
                 kont.datum = date;
                 }
             catch { }
+=======
+        public void ZmenStavBroker(int id, int stav)
+        {
+           
+>>>>>>> servis
         }
     }
 }
