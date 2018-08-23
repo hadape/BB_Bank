@@ -10,7 +10,11 @@ namespace BB_Banka
 {
     public class PozadavekController : ApiController
     {
-        // GET api/<controller>
+        /// <summary>
+        /// hlavní controller, přijme json a předá ho servisu, který ho rozebere
+        /// </summary>
+        /// <param name="a">json informací o požadavku</param>
+        /// <returns></returns>
         [HttpPost]
         public IEnumerable<string> Get([FromBody]PozadPrijeti a)
         {
@@ -21,7 +25,11 @@ namespace BB_Banka
             return new string[] { ab.ToString()};
         }
 
-        // GET api/<controller>/5
+        /// <summary>
+        /// nepotřebný testovací controller pro GET požadavek 
+        /// </summary>
+        /// <param name="id">id požadavku,který hledáme</param>
+        /// <returns>vrátí instanci požadavku</returns>
         [HttpGet]
         public Pozadavek Get(int id)
         {
@@ -58,6 +66,10 @@ namespace BB_Banka
         {
         }
     }
+
+   /// <summary>
+   /// třída pro uložení přijatých atributů do instance
+   /// </summary>
     public class PozadPrijeti
         {
 
@@ -70,6 +82,10 @@ namespace BB_Banka
         public int brokerid;
         public string email;
             }
+
+    /// <summary>
+    /// třída pro konverzi návratového typu
+    /// </summary>
     public class Pozadavek
     {
         public int id;
