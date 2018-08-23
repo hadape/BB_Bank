@@ -129,6 +129,7 @@
     <Compile Include="Classes\Broker.cs" />
     <Compile Include="Classes\Klient.cs" />
     <Compile Include="Classes\Kontakt.cs" />
+    <Compile Include="Classes\Status.cs" />
     <Compile Include="Classes\VstupCallCentrum.cs" />
     <Compile Include="Controllers\BankaController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />

@@ -14,9 +14,9 @@ namespace BB_Banka
     public class BankaController : ApiController
     {
         private static ServisCallCenter banka = new ServisCallCenter();
-        public string GetZmenBrokera(int id, int stav)
+        public KeeperStatus GetZmenBrokera(int id, int stav)
         {
-            
+            KeeperStatus status = new KeeperStatus();
             try
             {
                 
@@ -27,24 +27,28 @@ namespace BB_Banka
                 }
 
                 banka.ZmenStavBroker(id, stav);
-                return $"Změna proběhla v pořádku Broker ID:{banka.VratBrokera(id).id}" +
-                    $", název:{banka.VratBrokera(id).nazev}" +
-                    $",stav:{banka.VratBrokera(id).aktivni}";
+                return status;
             }
             catch (InvalidOperationException)
             {
-                return $"Zadané ID ({id}) brokera neexistuje v databázi";
+                status.Kod = 0;
+                status.Status = $"Zadané ID ({id}) brokera neexistuje v databázi";
+                return status;
             }
             catch (Exception e){
-                return e.ToString();
+                status.Kod = 0;
+                status.Status = e.Message;
+                return status;
             }
             
 
         }
         [HttpPost]
-        public string Update(VstupCallCentrum vstup)
+        public KeeperStatus Update(VstupCallCentrum vstup)
         {
-            return banka.UpdateData(vstup);
+            KeeperStatus status = new KeeperStatus();
+            banka.UpdateData(vstup);
+            return status;
         }
       
     }

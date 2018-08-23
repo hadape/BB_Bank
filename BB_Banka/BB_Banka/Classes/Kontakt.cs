@@ -7,6 +7,9 @@ using System.Web;
 
 namespace BB_Banka.Classes
 {
+    /// <summary>
+    /// Třída kontakty pro konvertování z EF
+    /// </summary>
     public class Kontakt
     {
         public int id { get; set; }
@@ -16,6 +19,11 @@ namespace BB_Banka.Classes
 
         public virtual Pozadavek Pozadavky { get; set; }
 
+        /// <summary>
+        /// Přetypovává objekt KLIENTI z EF na třídu Klient
+        /// </summary>
+        /// <param name="kontakt">Objekt typu KONTAKTY na přetypování</param>
+        /// <returns>Vrátí přetypovaný kontakt, objekt Kontakt</returns>
         public Kontakt ToKontakt(KONTAKTY kontakt)
         {
             this.id = kontakt.id;

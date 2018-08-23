@@ -22,7 +22,7 @@ namespace BB_Banka
             return callcentrum.ZiskejPozadavek();
         }
         [HttpPost]
-        public string Update(VstupCallCentrum vstup)
+        public KeeperStatus Update(VstupCallCentrum vstup)
         {
             return banka.UpdateData(vstup);
         }

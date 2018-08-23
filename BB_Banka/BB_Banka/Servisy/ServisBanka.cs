@@ -27,9 +27,10 @@ namespace BB_Banka.Servisy
             return entities.BROKERI.Where(brk => brk.id == id).First();
         }
 
-        public string UpdateData(VstupCallCentrum vstup)
+        public KeeperStatus UpdateData(VstupCallCentrum vstup)
         {
             DateTime neplatne = new DateTime(0001, 01, 01);
+            KeeperStatus status = new KeeperStatus();
             try
             {
                 POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
@@ -45,28 +46,31 @@ namespace BB_Banka.Servisy
                 entities.KONTAKTY.Add(novy_kontakt);
                 update_klient.jmeno = vstup.jmeno;
                 vlozDatum(vstup.narozen, update_klient);
-                //update_klient.narozen = vstup.narozen;
                 update_klient.prijmeni = vstup.prijmeni;
                 update_klient.rodne_cislo = vstup.rodne_cislo;
                 update_klient.email = vstup.email;
                 update_klient.bydliste = vstup.bydliste;
                 update_pozadavek.vysledek = vstup.vysledek;
                 entities.SaveChanges();
-                return "Změna provedena úspěšně";
+                return status;
             }
             catch (InvalidOperationException)
             {
-                return $"ID požadavku, nebo klienta neexistuje, update neproveden";
+                status.Kod = 0;
+                status.Status = $"ID požadavku, nebo klienta neexistuje, update neproveden";
+                return status;
             }
             catch (Exception e)
             {
-                return e.Message;
+                status.Kod = 0;
+                status.Status = e.Message;
+                return status;
             }
 
         }
         public void vlozDatum(DateTime? date, KLIENTI kl) { 
             
-                DateTime neplatne = new DateTime(0001, 01, 01);
+               
                 if (date is null)
                 {
                     throw new Exception("Datum narození není ve správném formátu, ostatní informace aktualizovany");

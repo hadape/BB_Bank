@@ -6,6 +6,9 @@ using System.Web;
 
 namespace BB_Banka.Classes
 {
+    /// <summary>
+    /// Třída Broker pro konvertování dat z EF
+    /// </summary>
     public class Broker
     {
         public int id { get; set; }

@@ -5,6 +5,9 @@ using System.Web;
 
 namespace BB_Banka.Classes
 {
+    /// <summary>
+    /// Třída pro příjem Jsona z CallCentra a manipulaci s ním
+    /// </summary>
     public class VstupCallCentrum
     {
         
