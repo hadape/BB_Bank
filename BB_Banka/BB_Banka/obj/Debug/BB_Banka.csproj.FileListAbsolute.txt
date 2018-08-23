@@ -164,3 +164,10 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.Core
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.CopyComplete
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.pdb
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\Castle.Core.dll
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\NSubstitute.dll
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.dll
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.pdb
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.xml
+C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Extensions.xml

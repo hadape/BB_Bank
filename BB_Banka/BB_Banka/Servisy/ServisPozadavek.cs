@@ -11,6 +11,8 @@ namespace BB_Banka
 
 
     {
+
+
         /// <summary>
         /// proměnná pro uložení zprávy v případě výskytu výjimky
         /// </summary>
@@ -19,14 +21,24 @@ namespace BB_Banka
     /// číslo kódu, které rozhodne o stavu daného požadavku
     /// </summary>
         public int kod = 1;
+
+
+        static Random rn = new Random();
         /// <summary>
-        /// proměnná pro předání rpsn Controlleru
+        /// proměnná pro předání rpsn Controlleru, náhodně se 
+        /// generuje vždy, když je zavolána metoda PidejPozadavky(řádek 156)
         /// </summary>
-        public decimal rpsn =0;
+        public static decimal rpsn = (decimal)rn.NextDouble() + 1;
         /// <summary>
         /// proměnná pro předání celkového úroku Controlleru
         /// </summary>
         public decimal urok = 0;
+
+
+       
+        
+       
+
         private KalkulaceEntities context;
         /// <summary>
         /// běžný bezparametrický konstruktor, vytvoří instanci databázové entity(context)
@@ -136,18 +148,17 @@ namespace BB_Banka
                     }
 
                     //cerna skrinka cerskrin
-                    Random rn = new Random();
-                    decimal cerskrin = (decimal)rn.NextDouble() + 1;
-                    rpsn = cerskrin;
+                    
                     //naplnění a výpočet parametrů požadavku
-                    p.spl_celkem = pujcka * cerskrin;
+                    p.spl_celkem = pujcka * rpsn;
                     p.castka = pujcka;
-                    p.rpsn = cerskrin;
+                    p.rpsn = rpsn;
+                    rpsn= (decimal)rn.NextDouble() + 1;
                     p.poznamka = poznamka;
                     p.mesice = mesice;
                     p.vysledek = 1;
                     p.spl_mesic = p.spl_celkem / mesice;
-                    urok = (pujcka * cerskrin) - pujcka;
+                    urok = (pujcka * rpsn) - pujcka;
 
                     //naplnění parametrů klienta
                     k.pozadavek_id = p.id;

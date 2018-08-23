@@ -33,7 +33,7 @@ namespace BB_Banka
                     case 1:
                         zprava.status = "Požadavek úspěšně předán.";
                         zprava.splatka = ab;
-                        zprava.rpsn = (Math.Round(SP.rpsn, 2) - 1) * 100;
+                        zprava.rpsn = (Math.Round(ServisPozadavek.rpsn, 2) - 1) * 100;
                         zprava.urok = Math.Round(SP.urok, 2);
                         break;
                     case 2:
