@@ -46,9 +46,7 @@ namespace BB_Banka
         [HttpPost]
         public KeeperStatus Update(VstupCallCentrum vstup)
         {
-            KeeperStatus status = new KeeperStatus();
-            banka.UpdateData(vstup);
-            return status;
+            return banka.UpdateData(vstup);
         }
       
     }
