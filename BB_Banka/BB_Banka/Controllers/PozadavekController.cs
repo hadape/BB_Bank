@@ -120,6 +120,7 @@ namespace BB_Banka
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> PolishException
             pp.klient_id = SP.GetPozadavek(id).klient_id;
@@ -153,6 +154,16 @@ namespace BB_Banka
 >>>>>>> Merg-nuto, u me funguje
 =======
 >>>>>>> PolishException
+=======
+            pp.klient_id = SP.GetPozadavek(id).klient_id;
+            pp.broker_id = SP.GetPozadavek(id).broker_id;
+            pp.mesice = SP.GetPozadavek(id).mesice;
+            pp.castka = SP.GetPozadavek(id).castka;
+            pp.rpsn = SP.GetPozadavek(id).rpsn;
+            pp.poznamka = SP.GetPozadavek(id).poznamka;
+            pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
+            pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
+>>>>>>> Pozadavekclassa
 
             return pp;
         }
@@ -225,6 +236,7 @@ namespace BB_Banka
         public decimal splatka;
         public decimal rpsn;
         public decimal urok;
+<<<<<<< HEAD
 =======
             }
 <<<<<<< HEAD
@@ -261,4 +273,7 @@ namespace BB_Banka
 >>>>>>> Merg-nuto, u me funguje
 =======
 >>>>>>> PolishException
+=======
+    }
+>>>>>>> Pozadavekclassa
 }

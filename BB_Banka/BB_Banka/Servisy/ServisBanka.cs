@@ -115,7 +115,9 @@ namespace BB_Banka.Servisy
         {
             try {
                 DateTime neplatne = new DateTime(2001, 01, 01);
-                if (date==neplatne) { }
+                if (date==neplatne) {
+                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
+                }
                 kont.datum = date;
                 }
             catch { }
