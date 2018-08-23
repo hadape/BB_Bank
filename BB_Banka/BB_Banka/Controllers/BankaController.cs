@@ -41,6 +41,7 @@ namespace BB_Banka
             }
             
 
+<<<<<<< HEAD
         }
         [HttpPost]
         public string Update(VstupCallCentrum vstup)
@@ -59,6 +60,13 @@ namespace BB_Banka
         {
 
 >>>>>>> servis_banka, servis call centrum, az do update hotovo
+=======
+        }
+        [HttpPost]
+        public string Update(VstupCallCentrum vstup)
+        {
+            return banka.UpdateData(vstup);
+>>>>>>> PolishException
         }
       
     }

@@ -332,6 +332,7 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.Copy
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.pdb
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\Castle.Core.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\NSubstitute.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.dll
@@ -343,3 +344,5 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Ext
 >>>>>>> servis_banka, servis call centrum, az do update hotovo
 =======
 >>>>>>> něco
+=======
+>>>>>>> PolishException

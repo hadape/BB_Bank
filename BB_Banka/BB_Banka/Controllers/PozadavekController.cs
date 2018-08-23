@@ -107,7 +107,10 @@ namespace BB_Banka
         }
 
         // GET api/<controller>/5
+<<<<<<< HEAD
 >>>>>>> Asi mergnute banka+pozadavek+callcentrum
+=======
+>>>>>>> PolishException
         [HttpGet]
         public Pozadavek Get(int id)
         {
@@ -116,6 +119,9 @@ namespace BB_Banka
             pp.id = SP.GetPozadavek(id).id;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> PolishException
             pp.klient_id = SP.GetPozadavek(id).klient_id;
             pp.broker_id = SP.GetPozadavek(id).broker_id;
             pp.mesice = SP.GetPozadavek(id).mesice;
@@ -124,6 +130,7 @@ namespace BB_Banka
             pp.poznamka = SP.GetPozadavek(id).poznamka;
             pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
             pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
+<<<<<<< HEAD
 =======
             pp.k_id = SP.GetPozadavek(id).klient_id;
             pp.b_id = SP.GetPozadavek(id).broker_id;
@@ -144,6 +151,8 @@ namespace BB_Banka
             pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
             pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
 >>>>>>> Merg-nuto, u me funguje
+=======
+>>>>>>> PolishException
 
             return pp;
         }
@@ -167,6 +176,7 @@ namespace BB_Banka
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     /// <summary>
     /// třída pro uložení přijatých atributů do instance
@@ -177,6 +187,10 @@ namespace BB_Banka
     public class PozadPrijeti
         {
 >>>>>>> Asi mergnute banka+pozadavek+callcentrum
+=======
+    public class PozadPrijeti
+        {
+>>>>>>> PolishException
 
         public string telcis;
         public int pujcka;
@@ -186,6 +200,7 @@ namespace BB_Banka
         public string poznamka;
         public int brokerid;
         public string email;
+<<<<<<< HEAD
 <<<<<<< HEAD
     }
 
@@ -227,6 +242,9 @@ namespace BB_Banka
 >>>>>>> Asi mergnute banka+pozadavek+callcentrum
     }
 =======
+=======
+            }
+>>>>>>> PolishException
     //public class Pozadavek
     //{
     //    public int id;
@@ -239,5 +257,8 @@ namespace BB_Banka
     //    public decimal? mes_splatka;
     //    public decimal? cel_splatka;
     //}
+<<<<<<< HEAD
 >>>>>>> Merg-nuto, u me funguje
+=======
+>>>>>>> PolishException
 }

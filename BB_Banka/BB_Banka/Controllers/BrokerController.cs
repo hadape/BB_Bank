@@ -47,7 +47,10 @@ namespace BB_Banka
 =======
             byte[] data = File.ReadAllBytes(fn);
             //string data = "nutno odremovat řádek nad tím";
+<<<<<<< HEAD
 >>>>>>> Posílání pdf
+=======
+>>>>>>> PolishException
             return new
             {
                 //stav = value,

@@ -32,20 +32,30 @@ namespace BB_Banka.Servisy
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string UpdateData(VstupCallCentrum vstup)
         {
             DateTime neplatne = new DateTime(2001, 01, 01);
+=======
+        public string UpdateData(VstupCallCentrum vstup)
+        {
+>>>>>>> PolishException
             try { 
             POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
             KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
             KONTAKTY novy_kontakt = new KONTAKTY();
                 vlozDatum(vstup.datum, novy_kontakt);
+<<<<<<< HEAD
                 if (vstup.datum == neplatne)
                 {
                     throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
                 }
                 //novy_kontakt.datum = vstup.datum;
                 novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+=======
+                //novy_kontakt.datum = vstup.datum;
+            novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+>>>>>>> PolishException
             novy_kontakt.vysledek = vstup.vysledek;
             entities.KONTAKTY.Add(novy_kontakt);
             update_klient.jmeno = vstup.jmeno;
@@ -66,6 +76,7 @@ namespace BB_Banka.Servisy
             {
                 return e.Message;
             }
+<<<<<<< HEAD
 
         }
         public void vlozDatum(DateTime date, KONTAKTY kont)
@@ -95,8 +106,19 @@ namespace BB_Banka.Servisy
             update_klient.telefon = klient.telefon;
             update_klient.email = klient.telefon;
             update_klient.bydliste = klient.bydliste;
+=======
+>>>>>>> PolishException
 
 >>>>>>> servis_banka, servis call centrum, az do update hotovo
+        }
+        public void vlozDatum(DateTime date, KONTAKTY kont)
+        {
+            try {
+                DateTime neplatne = new DateTime(2001, 01, 01);
+                if (date==neplatne) { }
+                kont.datum = date;
+                }
+            catch { }
         }
     }
 }
