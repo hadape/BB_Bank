@@ -141,11 +141,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\Broker.cs" />
     <Compile Include="Classes\Klient.cs" />
-<<<<<<< HEAD
     <Compile Include="Classes\Kontakt.cs" />
+    <Compile Include="Classes\Notification.cs" />
     <Compile Include="Classes\VstupCallCentrum.cs" />
-=======
->>>>>>> servis_banka, servis call centrum, az do update hotovo
     <Compile Include="Controllers\BankaController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CallCentrumController.cs" />
@@ -188,6 +186,7 @@
     <Compile Include="Servisy\ServisCallcentrum.cs" />
     <Compile Include="Servisy\ServisPozadavek.cs" />
     <Compile Include="Servisy\ServisReport.cs" />
+    <Compile Include="Testy\TestKalkulace.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

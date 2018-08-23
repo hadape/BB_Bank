@@ -13,7 +13,6 @@ namespace BB_Banka
 {
     public class BankaController : ApiController
     {
-<<<<<<< HEAD
         private static ServisCallCenter banka = new ServisCallCenter();
         public string GetZmenBrokera(int id, int stav)
         {
@@ -41,32 +40,11 @@ namespace BB_Banka
             }
             
 
-<<<<<<< HEAD
         }
         [HttpPost]
         public string Update(VstupCallCentrum vstup)
         {
             return banka.UpdateData(vstup);
-=======
-        
-        public void GetZmenBrokera(int id, int stav)
-        {
-            ServisCallCenter banka = new ServisCallCenter();
-            banka.ZmenStavBroker(id, stav);
-         
-        }
-
-        public void Update(Pozadavek pozadavek, Klient klient)
-        {
-
->>>>>>> servis_banka, servis call centrum, az do update hotovo
-=======
-        }
-        [HttpPost]
-        public string Update(VstupCallCentrum vstup)
-        {
-            return banka.UpdateData(vstup);
->>>>>>> PolishException
         }
       
     }

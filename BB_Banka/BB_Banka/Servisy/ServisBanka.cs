@@ -10,10 +10,6 @@ namespace BB_Banka.Servisy
 {
     public class ServisCallCenter
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> servis_banka, servis call centrum, az do update hotovo
         private KalkulaceEntities entities = new KalkulaceEntities();
 
         public void ZmenStavBroker (int id, int stav)
@@ -31,42 +27,20 @@ namespace BB_Banka.Servisy
             return entities.BROKERI.Where(brk => brk.id == id).First(); 
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         public string UpdateData(VstupCallCentrum vstup)
         {
             DateTime neplatne = new DateTime(2001, 01, 01);
-<<<<<<< HEAD
-=======
-        public string UpdateData(VstupCallCentrum vstup)
-        {
->>>>>>> PolishException
-=======
->>>>>>> servis datum rozpracovano
             try { 
             POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
             KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
             KONTAKTY novy_kontakt = new KONTAKTY();
                 vlozDatum(vstup.datum, novy_kontakt);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> servis datum rozpracovano
                 if (vstup.datum == neplatne)
                 {
                     throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
                 }
-<<<<<<< HEAD
                 //novy_kontakt.datum = vstup.datum;
                 novy_kontakt.pozadavek_id = vstup.pozadavek_id;
-=======
-                //novy_kontakt.datum = vstup.datum;
-            novy_kontakt.pozadavek_id = vstup.pozadavek_id;
->>>>>>> PolishException
-=======
-                //novy_kontakt.datum = vstup.datum;
-                novy_kontakt.pozadavek_id = vstup.pozadavek_id;
->>>>>>> servis datum rozpracovano
             novy_kontakt.vysledek = vstup.vysledek;
             entities.KONTAKTY.Add(novy_kontakt);
             update_klient.jmeno = vstup.jmeno;
@@ -87,40 +61,7 @@ namespace BB_Banka.Servisy
             {
                 return e.Message;
             }
-<<<<<<< HEAD
 
-        }
-        public void vlozDatum(DateTime date, KONTAKTY kont)
-        {
-            try {
-                DateTime neplatne = new DateTime(2001, 01, 01);
-                if (date==neplatne) {
-                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
-                }
-                kont.datum = date;
-                }
-            catch { }
-=======
-        public void ZmenStavBroker(int id, int stav)
-        {
-           
->>>>>>> servis
-=======
-        public void UpdateData(Pozadavek pozadavek, Klient klient)
-        {
-            POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == pozadavek.id).First();
-            KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == klient.id).First();
-            update_klient.jmeno = klient.jmeno;
-            update_klient.narozen = klient.narozen;
-            update_klient.prijmeni = klient.prijmeni;
-            update_klient.rodne_cislo = klient.rodne_cislo;
-            update_klient.telefon = klient.telefon;
-            update_klient.email = klient.telefon;
-            update_klient.bydliste = klient.bydliste;
-=======
->>>>>>> PolishException
-
->>>>>>> servis_banka, servis call centrum, az do update hotovo
         }
         public void vlozDatum(DateTime date, KONTAKTY kont)
         {

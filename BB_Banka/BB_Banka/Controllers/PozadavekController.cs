@@ -1,4 +1,5 @@
-﻿using BB_Banka.Servisy;
+﻿using BB_Banka.Classes;
+using BB_Banka.Servisy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace BB_Banka
 {
     public class PozadavekController : ApiController
     {
-<<<<<<< HEAD
         /// <summary>
         /// hlavní controller, přijme json a předá ho servisu, který ho rozebere a naskládá do databáze
         /// </summary>
@@ -34,30 +34,35 @@ namespace BB_Banka
                 {
                     case 1:
                         zprava.status = "Požadavek úspěšně předán.";
+                        zprava.kod = SP.kod;
                         zprava.splatka = ab;
                         zprava.rpsn = (Math.Round(ServisPozadavek.rpsn, 2) - 1) * 100;
                         zprava.urok = Math.Round(SP.urok, 2);
                         break;
                     case 2:
                         zprava.status = "Půjčka byla příliš nízká.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 3:
                         zprava.status = "Půjčka byla příliš vysoká.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 4:
                         zprava.status = "Půjčka má příliš krátkou dobu splatnosti.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 5:
                         zprava.status = "Půjčka má příliš dlouhou dobu splatnosti.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -65,12 +70,14 @@ namespace BB_Banka
                         break;
                     case 6:
                         zprava.status = "Zprostředkovatel neexistuje.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 7:
                         zprava.status = "Nebylo zadáno tel. číslo.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -78,6 +85,7 @@ namespace BB_Banka
 
                     default:
                         zprava.status = SP.specalmessage ;
+                        zprava.kod = SP.kod;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -94,35 +102,12 @@ namespace BB_Banka
         /// </summary>
         /// <param name="id">id požadavku,který hledáme</param>
         /// <returns>vrátí instanci požadavku</returns>
-=======
-        // GET api/<controller>
-        [HttpPost]
-        public IEnumerable<string> Get([FromBody]PozadPrijeti a)
-        {
-            
-            ServisPozadavek SP = new ServisPozadavek();
-            decimal ab=SP.PridejPozadavky(a.telcis,a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka,a.brokerid);
-            ab = Math.Round(ab, 2);
-            return new string[] { ab.ToString()};
-        }
-
-        // GET api/<controller>/5
-<<<<<<< HEAD
->>>>>>> Asi mergnute banka+pozadavek+callcentrum
-=======
->>>>>>> PolishException
         [HttpGet]
         public Pozadavek Get(int id)
         {
             Pozadavek pp = new Pozadavek();
             ServisPozadavek SP = new ServisPozadavek();
             pp.id = SP.GetPozadavek(id).id;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> PolishException
             pp.klient_id = SP.GetPozadavek(id).klient_id;
             pp.broker_id = SP.GetPozadavek(id).broker_id;
             pp.mesice = SP.GetPozadavek(id).mesice;
@@ -131,39 +116,6 @@ namespace BB_Banka
             pp.poznamka = SP.GetPozadavek(id).poznamka;
             pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
             pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
-<<<<<<< HEAD
-=======
-            pp.k_id = SP.GetPozadavek(id).klient_id;
-            pp.b_id = SP.GetPozadavek(id).broker_id;
-            pp.doba = SP.GetPozadavek(id).mesice;
-=======
-            pp.klient_id = SP.GetPozadavek(id).klient_id;
-            pp.broker_id = SP.GetPozadavek(id).broker_id;
-            pp.mesice = SP.GetPozadavek(id).mesice;
->>>>>>> Merg-nuto, u me funguje
-            pp.castka = SP.GetPozadavek(id).castka;
-            pp.rpsn = SP.GetPozadavek(id).rpsn;
-            pp.poznamka = SP.GetPozadavek(id).poznamka;
-<<<<<<< HEAD
-            pp.mes_splatka = SP.GetPozadavek(id).spl_mesic;
-            pp.cel_splatka = SP.GetPozadavek(id).spl_celkem;
->>>>>>> Asi mergnute banka+pozadavek+callcentrum
-=======
-            pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
-            pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
->>>>>>> Merg-nuto, u me funguje
-=======
->>>>>>> PolishException
-=======
-            pp.klient_id = SP.GetPozadavek(id).klient_id;
-            pp.broker_id = SP.GetPozadavek(id).broker_id;
-            pp.mesice = SP.GetPozadavek(id).mesice;
-            pp.castka = SP.GetPozadavek(id).castka;
-            pp.rpsn = SP.GetPozadavek(id).rpsn;
-            pp.poznamka = SP.GetPozadavek(id).poznamka;
-            pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
-            pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
->>>>>>> Pozadavekclassa
 
             return pp;
         }
@@ -186,22 +138,15 @@ namespace BB_Banka
         {
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
+
 
     /// <summary>
     /// třída pro uložení přijatých atributů do instance
     /// </summary>
     public class PozadPrijeti
     {
-=======
-    public class PozadPrijeti
-        {
->>>>>>> Asi mergnute banka+pozadavek+callcentrum
-=======
-    public class PozadPrijeti
-        {
->>>>>>> PolishException
 
         public string telcis;
         public int pujcka;
@@ -211,69 +156,8 @@ namespace BB_Banka
         public string poznamka;
         public int brokerid;
         public string email;
-<<<<<<< HEAD
-<<<<<<< HEAD
     }
+    
 
-    /// <summary>
-    /// třída pro konverzi návratového typu
-    /// </summary>
-    //public class Pozadavek
-    //{
-    //    public int id;
-    //    public int? b_id;
-    //    public int doba;
-    //    public int? k_id;
-    //    public int castka;
-    //    public decimal? RPSN;
-    //    public string poznamka;
-    //    public decimal? mes_splatka;
-    //    public decimal? cel_splatka;
-    //}
-    public class Notification
-        {
-        public string status;
-        public decimal splatka;
-        public decimal rpsn;
-        public decimal urok;
-<<<<<<< HEAD
-=======
-            }
-<<<<<<< HEAD
-    public class Pozadavek
-    {
-        public int id;
-        public int? b_id;
-        public int doba;
-        public int? k_id;
-        public int castka;
-        public decimal? RPSN;
-        public string poznamka;
-        public decimal? mes_splatka;
-        public decimal? cel_splatka;
->>>>>>> Asi mergnute banka+pozadavek+callcentrum
-    }
-=======
-=======
-            }
->>>>>>> PolishException
-    //public class Pozadavek
-    //{
-    //    public int id;
-    //    public int? b_id;
-    //    public int doba;
-    //    public int? k_id;
-    //    public int castka;
-    //    public decimal? RPSN;
-    //    public string poznamka;
-    //    public decimal? mes_splatka;
-    //    public decimal? cel_splatka;
-    //}
-<<<<<<< HEAD
->>>>>>> Merg-nuto, u me funguje
-=======
->>>>>>> PolishException
-=======
-    }
->>>>>>> Pozadavekclassa
+
 }
