@@ -7,10 +7,21 @@ using System.Web;
 namespace BB_Banka
 {
     public class ServisPozadavek
+        
 
 
-
-    {
+    {/// <summary>
+    /// číslo kódu, které rozhodne o stavu daného požadavku
+    /// </summary>
+        public int kod = 1;
+        /// <summary>
+        /// proměnná pro předání rpsn Controlleru
+        /// </summary>
+        public decimal rpsn =0;
+        /// <summary>
+        /// proměnná pro předání celkového úroku Controlleru
+        /// </summary>
+        public decimal urok = 0;
         private KalkulaceEntities context;
         /// <summary>
         /// běžný bezparametrický konstruktor, vytvoří instanci databázové entity(context)
@@ -43,9 +54,19 @@ namespace BB_Banka
         /// <returns>vrátí měsíční splátku v CZK</returns>
         public decimal PridejPozadavky(string telcis,string email, int pujcka, int mesice, string jmeno, string prijmeni, string poznamka, int broker_id)
         {
-            //ověření velikosti a délky půjčky(pokud nastane chyba, je navrácena 0)
-            if (pujcka < 20000 || pujcka > 500000 || mesice < 6 || mesice > 96) 
-            { return 0; }
+            //kód 2: půjčka příliš nízká
+            if (pujcka < 20000) { kod = 2; return 0; }
+            //kód 3: půjčka příliš vysoká
+            else if (pujcka > 500000) { kod = 3; return 0; }
+            //kód 4: půjčka na příliš krátkou dobu
+            else if (mesice < 6) { kod = 4; return 0; }
+            //kód 5: půjčka na příliš dlouhou dobu
+            else if (mesice > 96) { kod = 5; return 0; }
+            //kód 6: broker neexistuje
+            else if (context.BROKERI.Where(brok => brok.id == broker_id).FirstOrDefault() == null) { kod = 6; return 0; }
+            //kód 7: nebylo zadáno tel. číslo
+            else if (telcis == null) { kod = 7; return 0; }
+            //pokud je vše OK, kód zůstane 1(vše OK) a data jsou předána databázi
             else
             {
                 //vytvoření klienta a naplnění jeho parametrů
@@ -83,7 +104,7 @@ namespace BB_Banka
 
 
 
-               //ověření platnosti brokerovy smlouvy
+                //ověření platnosti brokerovy smlouvy
                 if
 
                     (
@@ -107,16 +128,17 @@ namespace BB_Banka
 
                 //cerna skrinka cerskrin
                 Random rn = new Random();
-                decimal cerskrin = (decimal)rn.NextDouble()+1;
-
-                //naplnění parametrů požadavku
+                decimal cerskrin = (decimal)rn.NextDouble() + 1;
+                rpsn = cerskrin;
+                //naplnění a výpočet parametrů požadavku
                 p.spl_celkem = pujcka * cerskrin;
                 p.castka = pujcka;
                 p.rpsn = cerskrin;
                 p.poznamka = poznamka;
                 p.mesice = mesice;
-                p.vysledek =1;
+                p.vysledek = 1;
                 p.spl_mesic = p.spl_celkem / mesice;
+                urok = (pujcka * cerskrin) - pujcka;
 
                 //naplnění parametrů klienta
                 k.pozadavek_id = p.id;

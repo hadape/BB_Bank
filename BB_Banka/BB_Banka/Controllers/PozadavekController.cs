@@ -11,18 +11,74 @@ namespace BB_Banka
     public class PozadavekController : ApiController
     {
         /// <summary>
-        /// hlavní controller, přijme json a předá ho servisu, který ho rozebere
+        /// hlavní controller, přijme json a předá ho servisu, který ho rozebere a naskládá do databáze
         /// </summary>
         /// <param name="a">json informací o požadavku</param>
-        /// <returns></returns>
+        /// <returns>vrací objekt typu Notifiction, který obsahuje informace o požadavku</returns>
         [HttpPost]
-        public IEnumerable<string> Get([FromBody]PozadPrijeti a)
+        public Notification Get([FromBody]PozadPrijeti a)
         {
-            
+            Notification zprava = new Notification();
             ServisPozadavek SP = new ServisPozadavek();
-            decimal ab=SP.PridejPozadavky(a.telcis,a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka,a.brokerid);
+
+            //příjem měsíční splátky od servisu + vyhodnocení kódu
+            decimal ab = SP.PridejPozadavky(a.telcis, a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka, a.brokerid);
             ab = Math.Round(ab, 2);
-            return new string[] { ab.ToString()};
+            //větvení, které nadefinuje proměnou zpráva(viz. řádek 21) podle kódu, který byl nastaven v instanci SP
+            switch (SP.kod)
+            {
+                case 1:
+                    zprava.status = "Požadavek úspěšně předán.";
+                    zprava.splatka = ab;
+                    zprava.rpsn = (Math.Round(SP.rpsn, 2)-1)*100;
+                    zprava.urok = Math.Round( SP.urok,2);
+                break;
+                case 2:
+                    zprava.status = "Půjčka byla příliš nízká.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+                case 3:
+                    zprava.status = "Půjčka byla příliš vysoká.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+                case 4:
+                    zprava.status = "Půjčka má příliš krátkou dobu splatnosti.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+                case 5:
+                    zprava.status = "Půjčka má příliš dlouhou dobu splatnosti.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+
+                    break;
+                case 6:
+                    zprava.status = "Zprostředkovatel neexistuje.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+                case 7:
+                    zprava.status = "Nebylo zadáno tel. číslo.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+
+                default: 
+                         zprava.status = "Neočekávaná chyba.";
+                    zprava.splatka = 0;
+                    zprava.rpsn = 0;
+                    zprava.urok = 0;
+                    break;
+            }
+            return zprava;
         }
 
         /// <summary>
@@ -67,11 +123,11 @@ namespace BB_Banka
         }
     }
 
-   /// <summary>
-   /// třída pro uložení přijatých atributů do instance
-   /// </summary>
+    /// <summary>
+    /// třída pro uložení přijatých atributů do instance
+    /// </summary>
     public class PozadPrijeti
-        {
+    {
 
         public string telcis;
         public int pujcka;
@@ -81,7 +137,7 @@ namespace BB_Banka
         public string poznamka;
         public int brokerid;
         public string email;
-            }
+    }
 
     /// <summary>
     /// třída pro konverzi návratového typu
@@ -97,5 +153,12 @@ namespace BB_Banka
         public string poznamka;
         public decimal? mes_splatka;
         public decimal? cel_splatka;
+    }
+    public class Notification
+        {
+        public string status;
+        public decimal splatka;
+        public decimal rpsn;
+        public decimal urok;
     }
 }
