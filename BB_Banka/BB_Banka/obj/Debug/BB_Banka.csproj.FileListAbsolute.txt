@@ -331,6 +331,7 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.Core
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.CopyComplete
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\obj\Debug\BB_Banka.pdb
+<<<<<<< HEAD
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\Castle.Core.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\NSubstitute.dll
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.dll
@@ -340,3 +341,5 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.xml
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Extensions.xml
 =======
 >>>>>>> servis_banka, servis call centrum, az do update hotovo
+=======
+>>>>>>> něco
