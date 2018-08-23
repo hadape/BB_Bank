@@ -70,13 +70,6 @@ namespace BB_Banka.Servisy
 
         }
 
-        //
-    //    public BROKERI AddBroker(BROKERI Broker)
-    //    {
-    //        context.BROKERI.Add(Broker);
-    //        context.SaveChanges();
-    //        return Broker;
-
-    //    }
+   
     }
 }
