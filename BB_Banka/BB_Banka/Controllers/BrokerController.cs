@@ -66,7 +66,7 @@ namespace BB_Banka
             ServisBroker ser = new ServisBroker();
             int id = ser.PridejBrokera(value).id;
             byte[] data; //Třídní proměnná pole byte pro konverzi z např. PDF souboru
-            string xx;
+            
 
 
 
@@ -101,6 +101,10 @@ namespace BB_Banka
             };
         }
 
+        /// <summary>
+        /// Metoda pro zpětnou konverzi souboru z JSON do pdf
+        /// </summary>
+        /// <param name="value"> b body PUT požadavku se vrací to co předtím do frontendu přišlo</param>
         // PUT api/<controller>
         public void PutSmlouvaZpatky([FromBody]byte[] value)
         {
