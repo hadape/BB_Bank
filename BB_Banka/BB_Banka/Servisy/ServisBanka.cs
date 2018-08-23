@@ -27,12 +27,14 @@ namespace BB_Banka.Servisy
             return entities.BROKERI.Where(brk => brk.id == id).First(); 
         }
 
-        public void UpdateData(VstupCallCentrum vstup)
+        public string UpdateData(VstupCallCentrum vstup)
         {
+            try { 
             POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
             KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
             KONTAKTY novy_kontakt = new KONTAKTY();
-            novy_kontakt.datum = vstup.datum;
+                vlozDatum(vstup.datum, novy_kontakt);
+                //novy_kontakt.datum = vstup.datum;
             novy_kontakt.pozadavek_id = vstup.pozadavek_id;
             novy_kontakt.vysledek = vstup.vysledek;
             entities.KONTAKTY.Add(novy_kontakt);
@@ -40,13 +42,30 @@ namespace BB_Banka.Servisy
             update_klient.narozen = vstup.narozen;
             update_klient.prijmeni = vstup.prijmeni;
             update_klient.rodne_cislo = vstup.rodne_cislo;
-            update_klient.telefon = vstup.telefon;
             update_klient.email = vstup.email;
             update_klient.bydliste = vstup.bydliste;
             update_pozadavek.vysledek = vstup.vysledek;
             entities.SaveChanges();
-           
+                return "Změna provedena úspěšně";
+            }
+            catch (InvalidOperationException e)
+            {
+                return e.Message;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
 
+        }
+        public void vlozDatum(DateTime date, KONTAKTY kont)
+        {
+            try {
+                DateTime neplatne = new DateTime(2001, 01, 01);
+                if (date==neplatne) { }
+                kont.datum = date;
+                }
+            catch { }
         }
     }
 }

@@ -13,14 +13,14 @@ float:left;
 <div class="graph"><canvas id="chart0" width="400" height="400"></canvas></div>
 <div class="graph"><canvas id="chart1" width="400" height="400"></canvas></div>
 <script>
-var data = [[104448,780000,450000],[3,3,1]];
+var data = [[300700,350000,800000],[6,1,1]];
 var titles = ['Celková částka', 'Počet požadavků'];
 for (var i = 0; i <data.length; i++) {
 var ctx = document.getElementById("chart"+i).getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["0-200 000","200 000 - 300 000","300 000 - 500 000"],
+        labels: ["0-200 000","300 000 - 500 000","500 000+"],
         datasets: [{
             label: titles[i],
             data: data[i],
