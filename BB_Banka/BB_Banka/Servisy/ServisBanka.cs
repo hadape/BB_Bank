@@ -36,26 +36,37 @@ namespace BB_Banka.Servisy
         public string UpdateData(VstupCallCentrum vstup)
         {
             DateTime neplatne = new DateTime(2001, 01, 01);
+<<<<<<< HEAD
 =======
         public string UpdateData(VstupCallCentrum vstup)
         {
 >>>>>>> PolishException
+=======
+>>>>>>> servis datum rozpracovano
             try { 
             POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
             KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
             KONTAKTY novy_kontakt = new KONTAKTY();
                 vlozDatum(vstup.datum, novy_kontakt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> servis datum rozpracovano
                 if (vstup.datum == neplatne)
                 {
                     throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
                 }
+<<<<<<< HEAD
                 //novy_kontakt.datum = vstup.datum;
                 novy_kontakt.pozadavek_id = vstup.pozadavek_id;
 =======
                 //novy_kontakt.datum = vstup.datum;
             novy_kontakt.pozadavek_id = vstup.pozadavek_id;
 >>>>>>> PolishException
+=======
+                //novy_kontakt.datum = vstup.datum;
+                novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+>>>>>>> servis datum rozpracovano
             novy_kontakt.vysledek = vstup.vysledek;
             entities.KONTAKTY.Add(novy_kontakt);
             update_klient.jmeno = vstup.jmeno;
