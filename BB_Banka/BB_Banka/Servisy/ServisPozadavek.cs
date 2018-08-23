@@ -85,6 +85,7 @@ namespace BB_Banka
                 p.spl_celkem = pujcka * cerskrin;
                 p.rpsn = cerskrin;
                 p.poznamka = poznamka;
+                p.mesice = mesice;
                 p.spl_mesic = p.spl_celkem / mesice;
 
                 context.POZADAVKY.Add(p);
