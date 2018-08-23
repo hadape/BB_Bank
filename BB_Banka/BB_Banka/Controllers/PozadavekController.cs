@@ -19,65 +19,71 @@ namespace BB_Banka
         public Notification Get([FromBody]PozadPrijeti a)
         {
             Notification zprava = new Notification();
-            ServisPozadavek SP = new ServisPozadavek();
-
-            //příjem měsíční splátky od servisu + vyhodnocení kódu
-            decimal ab = SP.PridejPozadavky(a.telcis, a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka, a.brokerid);
-            ab = Math.Round(ab, 2);
-            //větvení, které nadefinuje proměnou zpráva(viz. řádek 21) podle kódu, který byl nastaven v instanci SP
-            switch (SP.kod)
+            try
             {
-                case 1:
-                    zprava.status = "Požadavek úspěšně předán.";
-                    zprava.splatka = ab;
-                    zprava.rpsn = (Math.Round(SP.rpsn, 2)-1)*100;
-                    zprava.urok = Math.Round( SP.urok,2);
-                break;
-                case 2:
-                    zprava.status = "Půjčka byla příliš nízká.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
-                case 3:
-                    zprava.status = "Půjčka byla příliš vysoká.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
-                case 4:
-                    zprava.status = "Půjčka má příliš krátkou dobu splatnosti.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
-                case 5:
-                    zprava.status = "Půjčka má příliš dlouhou dobu splatnosti.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
+                
+                ServisPozadavek SP = new ServisPozadavek();
 
-                    break;
-                case 6:
-                    zprava.status = "Zprostředkovatel neexistuje.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
-                case 7:
-                    zprava.status = "Nebylo zadáno tel. číslo.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
+                //příjem měsíční splátky od servisu + vyhodnocení kódu
+                decimal ab = SP.PridejPozadavky(a.telcis, a.email, a.pujcka, a.mesice, a.jmeno, a.prijmeni, a.poznamka, a.brokerid);
+                ab = Math.Round(ab, 2);
+                //větvení, které nadefinuje proměnou zpráva(viz. řádek 21) podle kódu, který byl nastaven v instanci SP
+                switch (SP.kod)
+                {
+                    case 1:
+                        zprava.status = "Požadavek úspěšně předán.";
+                        zprava.splatka = ab;
+                        zprava.rpsn = (Math.Round(SP.rpsn, 2) - 1) * 100;
+                        zprava.urok = Math.Round(SP.urok, 2);
+                        break;
+                    case 2:
+                        zprava.status = "Půjčka byla příliš nízká.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+                    case 3:
+                        zprava.status = "Půjčka byla příliš vysoká.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+                    case 4:
+                        zprava.status = "Půjčka má příliš krátkou dobu splatnosti.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+                    case 5:
+                        zprava.status = "Půjčka má příliš dlouhou dobu splatnosti.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
 
-                default: 
-                         zprava.status = "Neočekávaná chyba.";
-                    zprava.splatka = 0;
-                    zprava.rpsn = 0;
-                    zprava.urok = 0;
-                    break;
+                        break;
+                    case 6:
+                        zprava.status = "Zprostředkovatel neexistuje.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+                    case 7:
+                        zprava.status = "Nebylo zadáno tel. číslo.";
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+
+                    default:
+                        zprava.status = SP.specalmessage ;
+                        zprava.splatka = 0;
+                        zprava.rpsn = 0;
+                        zprava.urok = 0;
+                        break;
+                }
+               
             }
+            catch (Exception e) { zprava.status = e.Message; }
             return zprava;
         }
 
