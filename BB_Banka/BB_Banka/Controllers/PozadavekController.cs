@@ -115,6 +115,7 @@ namespace BB_Banka
             ServisPozadavek SP = new ServisPozadavek();
             pp.id = SP.GetPozadavek(id).id;
 <<<<<<< HEAD
+<<<<<<< HEAD
             pp.klient_id = SP.GetPozadavek(id).klient_id;
             pp.broker_id = SP.GetPozadavek(id).broker_id;
             pp.mesice = SP.GetPozadavek(id).mesice;
@@ -127,12 +128,22 @@ namespace BB_Banka
             pp.k_id = SP.GetPozadavek(id).klient_id;
             pp.b_id = SP.GetPozadavek(id).broker_id;
             pp.doba = SP.GetPozadavek(id).mesice;
+=======
+            pp.klient_id = SP.GetPozadavek(id).klient_id;
+            pp.broker_id = SP.GetPozadavek(id).broker_id;
+            pp.mesice = SP.GetPozadavek(id).mesice;
+>>>>>>> Merg-nuto, u me funguje
             pp.castka = SP.GetPozadavek(id).castka;
-            pp.RPSN = SP.GetPozadavek(id).rpsn;
+            pp.rpsn = SP.GetPozadavek(id).rpsn;
             pp.poznamka = SP.GetPozadavek(id).poznamka;
+<<<<<<< HEAD
             pp.mes_splatka = SP.GetPozadavek(id).spl_mesic;
             pp.cel_splatka = SP.GetPozadavek(id).spl_celkem;
 >>>>>>> Asi mergnute banka+pozadavek+callcentrum
+=======
+            pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
+            pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
+>>>>>>> Merg-nuto, u me funguje
 
             return pp;
         }
@@ -201,6 +212,7 @@ namespace BB_Banka
         public decimal urok;
 =======
             }
+<<<<<<< HEAD
     public class Pozadavek
     {
         public int id;
@@ -214,4 +226,18 @@ namespace BB_Banka
         public decimal? cel_splatka;
 >>>>>>> Asi mergnute banka+pozadavek+callcentrum
     }
+=======
+    //public class Pozadavek
+    //{
+    //    public int id;
+    //    public int? b_id;
+    //    public int doba;
+    //    public int? k_id;
+    //    public int castka;
+    //    public decimal? RPSN;
+    //    public string poznamka;
+    //    public decimal? mes_splatka;
+    //    public decimal? cel_splatka;
+    //}
+>>>>>>> Merg-nuto, u me funguje
 }
