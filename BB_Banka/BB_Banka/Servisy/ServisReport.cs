@@ -49,21 +49,27 @@ namespace BB_Banka.Servisy
                 Count = g.Count()
             }).ToList();
 
+            //visualizace sgrupovaných dat 
             var labels = stats.Select(g => g.Group);
             var data1 = stats.Select(g => g.Total);
             var data2 = stats.Select(g => g.Count);
 
+            // cesta k souboru šablony
             var fn = HostingEnvironment.MapPath("~/App_Data/report_template.html");
+            // cesta k výstupnímu souboru
             var outFn = HostingEnvironment.MapPath("~/App_Data/report.html");
+            // načte šablonu
             var html = File.ReadAllText(fn);
 
             //převede do jsona
             var labelsJson = JsonConvert.SerializeObject(labels);
             var dataJson = JsonConvert.SerializeObject(new List<Object> { data1, data2 });
 
+            //Doplní do souboru vypočtená data pro graf a nadpisy 
             html = html.Replace("$LABELS$", labelsJson);
             html = html.Replace("$DATA$", dataJson);
 
+            //Uloží na disk
             File.WriteAllText(outFn, html);
 
             return stats;

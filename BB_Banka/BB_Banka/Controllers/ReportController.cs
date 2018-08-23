@@ -20,7 +20,8 @@ namespace BB_Banka
             try
             {
                 return new ServisReport().GetReport(id).ToList();
-            } catch (InvalidReport)
+            }
+            catch (InvalidReport)
             {
                 return new
                 {

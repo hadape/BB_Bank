@@ -25,9 +25,14 @@ namespace BB_Banka
         }
 
 
-     
 
 
+        /// <summary>
+        /// Pridej brokera, metoda uloží nového brokera do db.
+        /// </summary>
+        /// <param name="value">objekt z kontroleru, nesoucí parametry 
+        /// název, ičo, den počátku spolupráce .</param>
+        /// <returns> vrací </returns>
         public BROKERI PridejBrokera(BROKERI value)
         {
             BROKERI x = new BROKERI();

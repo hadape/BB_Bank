@@ -25,11 +25,7 @@ namespace BB_Banka
         }
 
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
 
         // POST api/<controller>
         public Object Post([FromBody]BROKERI value)
@@ -69,8 +65,10 @@ namespace BB_Banka
             
             try
             {
+                //vytvoří z PDF pole byte
                 var fn = HostingEnvironment.MapPath("~/App_Data/smlouva.pdf");
                 data = File.ReadAllBytes(fn);
+                // uloží pole byte zpět jako PDF
                 var outFn = HostingEnvironment.MapPath("~/App_Data/Copysmlouvy.pdf");
                 System.IO.File.WriteAllBytes(outFn, data);
             }
@@ -106,7 +104,7 @@ namespace BB_Banka
             File.WriteAllBytes(fn, value);
         }
 
-        // DELETE api/<controller>/5
+        // DELETE api/<controller>/5 nevyužito
         public void Delete(int id)
         {
         }
