@@ -164,6 +164,7 @@ C:\Users\user\source\repos\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.CoreCompi
 C:\Users\user\source\repos\BB_Banka\BB_Banka\obj\Debug\BB_Banka.csproj.CopyComplete
 C:\Users\user\source\repos\BB_Banka\BB_Banka\obj\Debug\BB_Banka.dll
 C:\Users\user\source\repos\BB_Banka\BB_Banka\obj\Debug\BB_Banka.pdb
+<<<<<<< HEAD
 C:\Users\user\source\repos\BB_Banka_zaloha_08-22-19-27\BB_Banka\bin\BB_Banka.dll.config
 C:\Users\user\source\repos\BB_Banka_zaloha_08-22-19-27\BB_Banka\bin\BB_Banka.dll
 C:\Users\user\source\repos\BB_Banka_zaloha_08-22-19-27\BB_Banka\bin\BB_Banka.pdb
@@ -337,3 +338,5 @@ C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Ext
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.pdb
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\nunit.framework.xml
 C:\Users\user\Documents\BB_Bank\BB_Banka\BB_Banka\bin\System.Threading.Tasks.Extensions.xml
+=======
+>>>>>>> servis_banka, servis call centrum, az do update hotovo
