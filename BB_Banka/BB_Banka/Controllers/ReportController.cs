@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BB_Banka.Servisy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,17 +10,15 @@ namespace BB_Banka
 {
     public class ReportController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        // GET api/<controller>/id
+        // id rozhoduje o typu reportu 1 věk, 2 broker, 3 částka
+        public IEnumerable<object> Get(int id) 
         {
-            return new string[] { "value1", "value2" };
+           return new ServisReport().GetReport(id).ToList();
+               
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
 
         // POST api/<controller>
         public void Post([FromBody]string value)

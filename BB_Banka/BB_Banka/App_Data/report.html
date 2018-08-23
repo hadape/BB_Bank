@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<style>
+.graph {
+max-width: 600px;
+float:left;
+}
+</style>
+</head>
+<body>
+<div class="graph"><canvas id="chart0" width="400" height="400"></canvas></div>
+<div class="graph"><canvas id="chart1" width="400" height="400"></canvas></div>
+<script>
+var data = [[300700,350000,800000],[6,1,1]];
+var titles = ['Celková částka', 'Počet požadavků'];
+for (var i = 0; i <data.length; i++) {
+var ctx = document.getElementById("chart"+i).getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["0-200 000","300 000 - 500 000","500 000+"],
+        datasets: [{
+            label: titles[i],
+            data: data[i],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@
 
 namespace BB_Banka.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -28,6 +29,7 @@ namespace BB_Banka.Models
         public string soubor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<POZADAVKY> POZADAVKY { get; set; }
     }
 }
