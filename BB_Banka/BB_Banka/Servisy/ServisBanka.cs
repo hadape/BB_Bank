@@ -29,13 +29,18 @@ namespace BB_Banka.Servisy
 
         public string UpdateData(VstupCallCentrum vstup)
         {
+            DateTime neplatne = new DateTime(2001, 01, 01);
             try { 
             POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
             KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
             KONTAKTY novy_kontakt = new KONTAKTY();
                 vlozDatum(vstup.datum, novy_kontakt);
+                if (vstup.datum == neplatne)
+                {
+                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
+                }
                 //novy_kontakt.datum = vstup.datum;
-            novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+                novy_kontakt.pozadavek_id = vstup.pozadavek_id;
             novy_kontakt.vysledek = vstup.vysledek;
             entities.KONTAKTY.Add(novy_kontakt);
             update_klient.jmeno = vstup.jmeno;
