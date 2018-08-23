@@ -1,4 +1,5 @@
-﻿using BB_Banka.Servisy;
+﻿using BB_Banka.Classes;
+using BB_Banka.Servisy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,30 +34,35 @@ namespace BB_Banka
                 {
                     case 1:
                         zprava.status = "Požadavek úspěšně předán.";
+                        zprava.kod = SP.kod;
                         zprava.splatka = ab;
-                        zprava.rpsn = (Math.Round(SP.rpsn, 2) - 1) * 100;
+                        zprava.rpsn = (Math.Round(ServisPozadavek.rpsn, 2) - 1) * 100;
                         zprava.urok = Math.Round(SP.urok, 2);
                         break;
                     case 2:
                         zprava.status = "Půjčka byla příliš nízká.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 3:
                         zprava.status = "Půjčka byla příliš vysoká.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 4:
                         zprava.status = "Půjčka má příliš krátkou dobu splatnosti.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 5:
                         zprava.status = "Půjčka má příliš dlouhou dobu splatnosti.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -64,12 +70,14 @@ namespace BB_Banka
                         break;
                     case 6:
                         zprava.status = "Zprostředkovatel neexistuje.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
                         break;
                     case 7:
                         zprava.status = "Nebylo zadáno tel. číslo.";
+                        zprava.kod = 0;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -77,6 +85,7 @@ namespace BB_Banka
 
                     default:
                         zprava.status = SP.specalmessage ;
+                        zprava.kod = SP.kod;
                         zprava.splatka = 0;
                         zprava.rpsn = 0;
                         zprava.urok = 0;
@@ -130,6 +139,9 @@ namespace BB_Banka
         }
     }
 
+
+
+
     /// <summary>
     /// třída pro uložení přijatých atributů do instance
     /// </summary>
@@ -145,27 +157,7 @@ namespace BB_Banka
         public int brokerid;
         public string email;
     }
+    
 
-    /// <summary>
-    /// třída pro konverzi návratového typu
-    /// </summary>
-    //public class Pozadavek
-    //{
-    //    public int id;
-    //    public int? b_id;
-    //    public int doba;
-    //    public int? k_id;
-    //    public int castka;
-    //    public decimal? RPSN;
-    //    public string poznamka;
-    //    public decimal? mes_splatka;
-    //    public decimal? cel_splatka;
-    //}
-    public class Notification
-        {
-        public string status;
-        public decimal splatka;
-        public decimal rpsn;
-        public decimal urok;
-    }
+
 }

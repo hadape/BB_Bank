@@ -12,46 +12,45 @@ namespace BB_Banka.Servisy
     {
         private KalkulaceEntities entities = new KalkulaceEntities();
 
-        public void ZmenStavBroker(int id, int stav)
+        public void ZmenStavBroker (int id, int stav)
         {
             BROKERI zmena = entities.BROKERI.Where(brk => brk.id == id).First();
             zmena.aktivni = stav;
             entities.SaveChanges();
         }
 
-
+       
 
         public BROKERI VratBrokera(int id)
         {
 
-            return entities.BROKERI.Where(brk => brk.id == id).First();
+            return entities.BROKERI.Where(brk => brk.id == id).First(); 
         }
 
         public string UpdateData(VstupCallCentrum vstup)
         {
-            DateTime neplatne = new DateTime(0001, 01, 01);
-            try
-            {
-                POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
-                KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
-                KONTAKTY novy_kontakt = new KONTAKTY();
+            DateTime neplatne = new DateTime(2001, 01, 01);
+            try { 
+            POZADAVKY update_pozadavek = entities.POZADAVKY.Where(poz => poz.id == vstup.pozadavek_id).First();
+            KLIENTI update_klient = entities.KLIENTI.Where(kl => kl.id == vstup.klient_id).First();
+            KONTAKTY novy_kontakt = new KONTAKTY();
                 vlozDatum(vstup.datum, novy_kontakt);
                 if (vstup.datum == neplatne)
                 {
-                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, update nebyl proveden");
+                    throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
                 }
-                novy_kontakt.datum = vstup.datum;
+                //novy_kontakt.datum = vstup.datum;
                 novy_kontakt.pozadavek_id = vstup.pozadavek_id;
-                novy_kontakt.vysledek = vstup.vysledek;
-                entities.KONTAKTY.Add(novy_kontakt);
-                update_klient.jmeno = vstup.jmeno;
-                update_klient.narozen = vstup.narozen;
-                update_klient.prijmeni = vstup.prijmeni;
-                update_klient.rodne_cislo = vstup.rodne_cislo;
-                update_klient.email = vstup.email;
-                update_klient.bydliste = vstup.bydliste;
-                update_pozadavek.vysledek = vstup.vysledek;
-                entities.SaveChanges();
+            novy_kontakt.vysledek = vstup.vysledek;
+            entities.KONTAKTY.Add(novy_kontakt);
+            update_klient.jmeno = vstup.jmeno;
+            update_klient.narozen = vstup.narozen;
+            update_klient.prijmeni = vstup.prijmeni;
+            update_klient.rodne_cislo = vstup.rodne_cislo;
+            update_klient.email = vstup.email;
+            update_klient.bydliste = vstup.bydliste;
+            update_pozadavek.vysledek = vstup.vysledek;
+            entities.SaveChanges();
                 return "Změna provedena úspěšně";
             }
             catch (InvalidOperationException e)
@@ -64,16 +63,16 @@ namespace BB_Banka.Servisy
             }
 
         }
-        public void vlozDatum(DateTime date, KLIENTI kl) { 
-            
-                DateTime neplatne = new DateTime(0001, 01, 01);
-                if (date == neplatne)
-                {
+        public void vlozDatum(DateTime date, KONTAKTY kont)
+        {
+            try {
+                DateTime neplatne = new DateTime(2001, 01, 01);
+                if (date==neplatne) {
                     throw new Exception("Zadané datum u provedení kontaktu je neplatné, datum nebylo změněno");
                 }
-                kl.datum = date;
-            
-            
+                kont.datum = date;
+                }
+            catch { }
         }
     }
 }
