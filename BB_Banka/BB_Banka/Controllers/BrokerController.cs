@@ -11,8 +11,7 @@ using BB_Banka.Models;
 namespace BB_Banka
 {
 
-    /// <summary>
-    /// 
+
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     public class BrokerController : ApiController
@@ -37,7 +36,9 @@ namespace BB_Banka
         {
             ServisBroker ser = new ServisBroker();
             int id = ser.PridejBrokera(value).id;
-            byte[] data;
+
+            byte[] data; //Třídní proměnná pole byte pro konverzi z např. PDF souboru
+
             string xx;
 
 
