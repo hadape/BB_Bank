@@ -46,6 +46,7 @@ namespace BB_Banka
                     }
                 }
                 POZADAVKY p = new POZADAVKY();
+                KONTAKTY k = new KONTAKTY();
                 if (duplikat != true)
                 {
                     context.KLIENTI.Add(a);
@@ -86,8 +87,13 @@ namespace BB_Banka
                 p.rpsn = cerskrin;
                 p.poznamka = poznamka;
                 p.mesice = mesice;
+                p.vysledek =1;
                 p.spl_mesic = p.spl_celkem / mesice;
+                k.pozadavek_id = p.id;
+                k.vysledek = 1;
+                k.datum = DateTime.Now;
 
+                context.KONTAKTY.Add(k);
                 context.POZADAVKY.Add(p);
 
                 context.SaveChanges();
