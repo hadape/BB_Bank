@@ -17,7 +17,7 @@ namespace BB_Banka
     /// <seealso cref="System.Web.Http.ApiController" />
     public class BrokerController : ApiController
     {
-        
+        //toto volání je jen pro účely ladění
         // GET api/<controller>
         public List<BROKERI> GetBROKERI()
         {
@@ -35,6 +35,34 @@ namespace BB_Banka
         public Object Post([FromBody]BROKERI value)
           
         {
+            if (value.ico == null)
+            {
+                return new
+                {
+                    kod = 0,
+                    status  = "IČO nezadáno"
+                };
+            }
+
+            if (value.nazev == null)
+            {
+                return new
+                {
+                    kod = 0,
+                    status = "nazev nezadán"
+                };
+            }
+
+            if (value.start_datum == null)
+            {
+                return new
+                {
+                    kod = 0,
+                    status = "datum začátku smluvního vztahu nezadáno"
+                };
+            }
+
+
             ServisBroker ser = new ServisBroker();
             int id = ser.PridejBrokera(value).id;
             byte[] data; //Třídní proměnná pole byte pro konverzi z např. PDF souboru
@@ -53,8 +81,11 @@ namespace BB_Banka
             catch (Exception e)
             {
 
-                throw new FileNotFoundException("name", "soubor smlouvy nenalezen," +
-                    " nebo soubor výstupu kopie smlouvy otevřen v jiném programu");
+                return new
+                {
+                    kod = 0,
+                    status = " soubor nenalezen, nebo soubor výstupu kopie smlouvy otevřen v jiném programu"
+                };
 
             }
 
@@ -63,16 +94,18 @@ namespace BB_Banka
             //string data = "nutno odremovat řádek nad tím";
             return new
             {
-                //stav = xx,
+                status = 1,
                 extension = "pdf",
                 idBrokera  = id,
                 smlouva = data,
             };
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        // PUT api/<controller>
+        public void PutSmlouvaZpatky([FromBody]byte[] value)
         {
+            var fn = HostingEnvironment.MapPath("~/App_Data/smlouva_zpatky.pdf");
+            File.WriteAllBytes(fn, value);
         }
 
         // DELETE api/<controller>/5
