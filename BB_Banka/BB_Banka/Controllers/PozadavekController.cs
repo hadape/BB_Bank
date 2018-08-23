@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BB_Banka.Servisy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -98,14 +99,14 @@ namespace BB_Banka
             Pozadavek pp = new Pozadavek();
             ServisPozadavek SP = new ServisPozadavek();
             pp.id = SP.GetPozadavek(id).id;
-            pp.k_id = SP.GetPozadavek(id).klient_id;
-            pp.b_id = SP.GetPozadavek(id).broker_id;
-            pp.doba = SP.GetPozadavek(id).mesice;
+            pp.klient_id = SP.GetPozadavek(id).klient_id;
+            pp.broker_id = SP.GetPozadavek(id).broker_id;
+            pp.mesice = SP.GetPozadavek(id).mesice;
             pp.castka = SP.GetPozadavek(id).castka;
-            pp.RPSN = SP.GetPozadavek(id).rpsn;
+            pp.rpsn = SP.GetPozadavek(id).rpsn;
             pp.poznamka = SP.GetPozadavek(id).poznamka;
-            pp.mes_splatka = SP.GetPozadavek(id).spl_mesic;
-            pp.cel_splatka = SP.GetPozadavek(id).spl_celkem;
+            pp.spl_mesic = SP.GetPozadavek(id).spl_mesic;
+            pp.spl_celkem = SP.GetPozadavek(id).spl_celkem;
 
             return pp;
         }
@@ -148,18 +149,18 @@ namespace BB_Banka
     /// <summary>
     /// třída pro konverzi návratového typu
     /// </summary>
-    public class Pozadavek
-    {
-        public int id;
-        public int? b_id;
-        public int doba;
-        public int? k_id;
-        public int castka;
-        public decimal? RPSN;
-        public string poznamka;
-        public decimal? mes_splatka;
-        public decimal? cel_splatka;
-    }
+    //public class Pozadavek
+    //{
+    //    public int id;
+    //    public int? b_id;
+    //    public int doba;
+    //    public int? k_id;
+    //    public int castka;
+    //    public decimal? RPSN;
+    //    public string poznamka;
+    //    public decimal? mes_splatka;
+    //    public decimal? cel_splatka;
+    //}
     public class Notification
         {
         public string status;
