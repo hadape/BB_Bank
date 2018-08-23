@@ -6,6 +6,10 @@ using System.Web;
 
 namespace BB_Banka
 {
+
+    /// <summary>
+    /// Třída obsluhující požadavky, které přicházejí skrze kontrolér Servis
+    /// </summary>
     public class ServisBroker
     {
         private KalkulaceEntities context;
