@@ -48,6 +48,9 @@ namespace BB_Banka.Servisy
                 }
                 novy_kontakt.datum = vstup.datum;
                 novy_kontakt.pozadavek_id = vstup.pozadavek_id;
+                if (vstup.vysledek < 0 || vstup.vysledek > 5) {
+                    throw new Exception("Výsledek nebyl v požadovaném tvaru, 1 - nekontaktovaný, 2 - kontaktovaný, 3 - již nekontaktovat, 4 - předáno, 5 - uzavřeno ");
+                }
                 novy_kontakt.vysledek = vstup.vysledek;
                 entities.KONTAKTY.Add(novy_kontakt);
                 update_klient.jmeno = vstup.jmeno;
